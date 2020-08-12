@@ -36,3 +36,18 @@ function getImgById(imgId) {
     return img
 }
 
+function createMeme(imgId){
+    meme = {
+        selectedImgId: imgId,
+        selectedLineIdx: 0,
+        lines: [
+            {
+                txt: 'Type',
+                size: 20,
+                align: 'left',
+                color: 'black',
+                pos: { x: 0, y: 0 }
+            }
+        ]
+    }
+}

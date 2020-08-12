@@ -6,17 +6,17 @@
     <title>Document</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body onload="init()">
+<body onload="initCanvas()">
     <header>
         <nav class="nav-bar-header container">
             <span>Logo</span>
             <section class="nav-btns">
-                <button class="gallery-btn">Gallery</button>
+                <button onclick="onCloseEdit()" class="gallery-btn">Gallery</button>
                 <button class="about-btn">About</button>
             </section>
         </nav>
     </header>
-    <div class="home-page" hidden>
+    <div class="home-page">
         <main class="main-container container">
             <section class="search-bar">
                 <input class="search-input" type="text" placeholder="Search">
@@ -28,25 +28,25 @@
                 <button class="more-btn">More</button>
             </section>
             <div class="gallery-container grid">
-                <div><img class="img" src="img/img-squares/1.jpg" alt=""></div>
-                <div><img class="img" src="img/img-squares/2.jpg" alt=""></div>
-                <div><img class="img" src="img/img-squares/3.jpg" alt=""></div>
-                <div><img class="img" src="img/img-squares/4.jpg" alt=""></div>
-                <div><img class="img" src="img/img-squares/5.jpg" alt=""></div>
-                <div><img class="img" src="img/img-squares/6.jpg" alt=""></div>
-                <div><img class="img" src="img/img-squares/7.jpg" alt=""></div>
-                <div><img class="img" src="img/img-squares/8.jpg" alt=""></div>
-                <div><img class="img" src="img/img-squares/9.jpg" alt=""></div>
-                <div><img class="img" src="img/img-squares/3.jpg" alt=""></div>
-                <div><img class="img" src="img/img-squares/3.jpg" alt=""></div>
-                <div><img class="img" src="img/img-squares/3.jpg" alt=""></div>
+                <div class="meme-img" ><img onclick="onOpenEdit(this)" class="img" src="img/img-squares/1.jpg" alt=""></div>
+                <div class="meme-img" ><img onclick="onOpenEdit(this)" class="img" src="img/img-squares/2.jpg" alt=""></div>
+                <div class="meme-img" ><img onclick="onOpenEdit(this)" class="img" src="img/img-squares/3.jpg" alt=""></div>
+                <div class="meme-img" ><img onclick="onOpenEdit(this)" class="img" src="img/img-squares/4.jpg" alt=""></div>
+                <div class="meme-img" ><img onclick="onOpenEdit(this)" class="img" src="img/img-squares/5.jpg" alt=""></div>
+                <div class="meme-img" ><img onclick="onOpenEdit(this)" class="img" src="img/img-squares/6.jpg" alt=""></div>
+                <div class="meme-img" ><img onclick="onOpenEdit(this)" class="img" src="img/img-squares/7.jpg" alt=""></div>
+                <div class="meme-img" ><img onclick="onOpenEdit(this)" class="img" src="img/img-squares/8.jpg" alt=""></div>
+                <div class="meme-img" ><img onclick="onOpenEdit(this)" class="img" src="img/img-squares/9.jpg" alt=""></div>
+                <div class="meme-img" ><img onclick="onOpenEdit(this)" class="img" src="img/img-squares/3.jpg" alt=""></div>
+                <div class="meme-img" ><img onclick="onOpenEdit(this)" class="img" src="img/img-squares/3.jpg" alt=""></div>
+                <div class="meme-img" ><img onclick="onOpenEdit(this)" class="img" src="img/img-squares/3.jpg" alt=""></div>
                 
             </div>
         </main>
         
     </div>
 
-    <div class="edit-page">
+    <div class="edit-page hidden">
         <div class="wrap-container">
             <div class="canvas-container">
                 <canvas class="myCanvas" id="myCanvas" height="450" width="450" onclick="draw(event)">

@@ -5,18 +5,16 @@ var gCtx;
 window.addEventListener('resize', function () {
     // gCanvas.width = window.innerWidth;
     // gCanvas.height = window.innerHeight;
-    init()
+    initCanvas()
 
 })
 
-function init() {
+function initCanvas() {
     gCanvas = document.getElementById('myCanvas');
     gCtx = gCanvas.getContext('2d');
     // drawImg()
     resizeCanvas()
     renderCanvasImg()
-    
-
 
 }
 
@@ -81,4 +79,23 @@ function resizeCanvas() {
 
 function clearCanvas() {
     gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height);
+}
+
+function onOpenEdit(elImg) {
+    const elHomePage = document.querySelector('.home-page');
+    const elEditPage = document.querySelector('.edit-page');
+    elHomePage.classList.add('hidden')
+    elEditPage.classList.remove('hidden')
+    initCanvas()   
+}
+
+function onCloseEdit() {
+    const elHomePage = document.querySelector('.home-page');
+    const elEditPage = document.querySelector('.edit-page');
+    elHomePage.classList.remove('hidden')
+    elEditPage.classList.add('hidden')
+}
+
+function onSetgMeme(elImg) {
+    setgMeme(imdId)
 }
