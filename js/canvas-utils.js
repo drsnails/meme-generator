@@ -151,19 +151,13 @@ function downloadCanvas(elLink) {
 
 
 
-function resizeCanvas() {// || wrong function name
 
-    const elContainer = document.querySelector('.canvas-container');
-    gCanvas.width = elContainer.offsetWidth;
-    gCanvas.height = elContainer.offsetHeight;
-    initColors()//not needed / wrong function name
-    initPositions()
-}
 
-function drawImg() {
-    const elImg = document.querySelector('img');
-    gCtx.drawImage(elImg, 0, 0, gCanvas.width, gCanvas.height);
-}
+
+// function drawImg() {
+//     const elImg = document.querySelector('img');
+//     gCtx.drawImage(elImg, 0, 0, gCanvas.width, gCanvas.height);
+// }
 
 
 

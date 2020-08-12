@@ -7,12 +7,10 @@
     /* font-style: normal; */
 }
 
-/* @font-face {
-    font-family: 'latobold';
-    src: url("../fonts/lato/Lato-Bold.ttf") format("truetype");
-    font-weight: normal;
-    font-style: normal;
-  } */
+@font-face {
+    font-family: 'impact';
+    src: url(../fonts/Impact/Impact-400.ttf);
+}
 
 /* HELPERS */
 
@@ -143,24 +141,57 @@ header {
 
 .wrap-container {
     width: 90vw;
+    height: 80vh;
     display: flex;
     padding: 20px;
     margin: 0 auto;
-    justify-content: space-evenly;
+    justify-content: center;
 }
 
 .canvas-container {
     display: inline-block;
-    background-color: tomato;
-    width: 40%;
-    /* height: 100%; */
+    /* border: 1px solid white; */
+    /* background-color: tomato; */
+    width: 350px;
+    height: 350px;
+    margin: 0 20px 0 0;
     
 }
 
 .edit-container {
-    display: inline-block;
-    background-color: rgb(197, 192, 191);
-    width: 40%;
-    /* height: 100%; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
     
+    background-color: rgb(197, 192, 191);
+    width: 350px;
+    height: 350px;
+    margin: 0 0 0 20px;
+    /* height: 100%; */
+}
+
+
+
+.line-edit {
+    display: flex;
+    /* margin: 0 auto; */
+    justify-content: space-evenly;
+}
+
+.text-edit {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.icons {
+    margin: 0 auto;
+}
+
+.share-btns {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.font-size {
+    text-decoration: underline;
 }
