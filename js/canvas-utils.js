@@ -16,10 +16,10 @@ function init() {
     gIsMouseDown = false
     initPositions()
     initColors()
-    resizeCanvas();
+    resizeCanvasByCont();
 
 
-    window.addEventListener('resize', resizeCanvas)
+    window.addEventListener('resize', resizeCanvasByCont)
 
 
 }

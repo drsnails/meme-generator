@@ -19,7 +19,10 @@
     <div class="home-page">
         <main class="main-container container">
             <section class="search-bar">
-                <input class="search-input" type="text" placeholder="Search">
+                <section class="search-input-sec">
+                    <input class="search-input" type="text" placeholder="         Search">
+                    <i class="fas fa-search"></i>
+                </section>
                 <div class="key-words">
                     <span>Funny</span>
                     <span>Wow</span>
@@ -28,18 +31,18 @@
                 <button class="more-btn">More</button>
             </section>
             <div class="gallery-container grid">
-                <div class="meme-img" ><img onclick="onOpenEdit(this)" class="img" src="img/img-squares/1.jpg" alt=""></div>
-                <div class="meme-img" ><img onclick="onOpenEdit(this)" class="img" src="img/img-squares/2.jpg" alt=""></div>
-                <div class="meme-img" ><img onclick="onOpenEdit(this)" class="img" src="img/img-squares/3.jpg" alt=""></div>
-                <div class="meme-img" ><img onclick="onOpenEdit(this)" class="img" src="img/img-squares/4.jpg" alt=""></div>
-                <div class="meme-img" ><img onclick="onOpenEdit(this)" class="img" src="img/img-squares/5.jpg" alt=""></div>
-                <div class="meme-img" ><img onclick="onOpenEdit(this)" class="img" src="img/img-squares/6.jpg" alt=""></div>
-                <div class="meme-img" ><img onclick="onOpenEdit(this)" class="img" src="img/img-squares/7.jpg" alt=""></div>
-                <div class="meme-img" ><img onclick="onOpenEdit(this)" class="img" src="img/img-squares/8.jpg" alt=""></div>
-                <div class="meme-img" ><img onclick="onOpenEdit(this)" class="img" src="img/img-squares/9.jpg" alt=""></div>
-                <div class="meme-img" ><img onclick="onOpenEdit(this)" class="img" src="img/img-squares/3.jpg" alt=""></div>
-                <div class="meme-img" ><img onclick="onOpenEdit(this)" class="img" src="img/img-squares/3.jpg" alt=""></div>
-                <div class="meme-img" ><img onclick="onOpenEdit(this)" class="img" src="img/img-squares/3.jpg" alt=""></div>
+                <div class="meme-img" ><img onclick="onStartMeme(1)" class="img" src="img/img-squares/1.jpg" alt=""></div>
+                <div class="meme-img" ><img onclick="onStartMeme(2)" class="img" src="img/img-squares/2.jpg" alt=""></div>
+                <div class="meme-img" ><img onclick="onStartMeme(3)" class="img" src="img/img-squares/3.jpg" alt=""></div>
+                <div class="meme-img" ><img onclick="onStartMeme(4)" class="img" src="img/img-squares/4.jpg" alt=""></div>
+                <div class="meme-img" ><img onclick="onStartMeme(5)" class="img" src="img/img-squares/5.jpg" alt=""></div>
+                <div class="meme-img" ><img onclick="onStartMeme(6)" class="img" src="img/img-squares/6.jpg" alt=""></div>
+                <div class="meme-img" ><img onclick="onStartMeme(7)" class="img" src="img/img-squares/7.jpg" alt=""></div>
+                <div class="meme-img" ><img onclick="onStartMeme(8)" class="img" src="img/img-squares/8.jpg" alt=""></div>
+                <div class="meme-img" ><img onclick="onStartMeme(9)" class="img" src="img/img-squares/9.jpg" alt=""></div>
+                <div class="meme-img" ><img onclick="onStartMeme(10)" class="img" src="img/img-squares/10.jpg" alt=""></div>
+                <div class="meme-img" ><img onclick="onStartMeme(12)" class="img" src="img/img-squares/11.jpg" alt=""></div>
+                <div class="meme-img" ><img onclick="onStartMeme(13)" class="img" src="img/img-squares/12.jpg" alt=""></div>
                 
             </div>
         </main>
@@ -53,26 +56,26 @@
                 </canvas>
             </div>
             <div class="edit-container">
-                <input class="text-line" type="text">
+                <input class="input-txt" oninput="onChangeLineTxt(this)" class="text-line" type="text" placeholder="Type somthing">
                 <div class="line-edit">
-                    <div class="change-line"><i class="fas fa-exchange-alt"></i></div>
-                    <div class="add-line">+</div>
-                    <div class="delete-line"><i class="fas fa-trash-alt"></i></div>
-                    <div class="move-up"><i class="fas fa-long-arrow-alt-up"></i></div>
-                    <div class="move-down"><i class="fas fa-long-arrow-alt-down"></i></div>
+                    <div class="edit-btn change-line"><i class="fas fa-exchange-alt"></i></div>
+                    <div class="edit-btn add-line">+</div>
+                    <div class="edit-btn delete-line"><i class="fas fa-trash-alt"></i></div>
+                    <div onclick="onIncLinePos()" class="edit-btn move-up"><i class="fas fa-long-arrow-alt-up"></i></div>
+                    <div onclick="onDecLinePos()" class="edit-btn move-down"><i class="fas fa-long-arrow-alt-down"></i></div>
                 </div>
 
                 <div class="text-edit">
-                    <div class="font-inc"><i class="fas fa-font"></i>+</div>
-                    <div class="font-dec"><i class="fas fa-font"></i>-</div>
-                    <div class="text-left"><i class="fas fa-align-left"></i></div>
-                    <div class="text-center"><i class="fas fa-align-center"></i></div>
-                    <div class="text-right"><i class="fas fa-align-right"></i></div>
+                    <div onclick="onIncFontSize()" class="edit-btn font-inc"><i class="fas fa-font"></i><i class="fas fa-plus"></i></div>
+                    <div onclick="onDecFontSize()" class="edit-btn font-dec"><i class="fas fa-font"></i><i class="fas fa-minus"></i></div>
+                    <div class="edit-btn text-left"><i class="fas fa-align-left"></i></div>
+                    <div class="edit-btn text-center"><i class="fas fa-align-center"></i></div>
+                    <div class="edit-btn text-right"><i class="fas fa-align-right"></i></div>
                     <select class="font-family" name="" id="">
                         <option value="Impact">Impact</option>
                         <option value="Ariel">Ariel</option>
                     </select>
-                    <div class="font-size">S</div>
+                    <div class="edit-btn font-size">S</div>
                     <input class="color" type="color">
                 </div>
 

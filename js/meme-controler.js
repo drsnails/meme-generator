@@ -2,74 +2,93 @@
 
 var gCanvas;
 var gCtx;
+var gIsDoneEdit = false
 window.addEventListener('resize', function () {
-    // gCanvas.width = window.innerWidth;
-    // gCanvas.height = window.innerHeight;
-    initCanvas()
-
+    rendergMeme()
 })
 
 function initCanvas() {
     gCanvas = document.getElementById('myCanvas');
     gCtx = gCanvas.getContext('2d');
-    // drawImg()
-    resizeCanvas()
-    renderCanvasImg()
+
+    rendergMeme()
 
 }
 
 
-function renderCanvasImg() {
+
+function rendergMeme() {
     let img = getImg()
-    drawImg(img.url)
-    console.log("renderCanvasImg -> img.url", img.url)
+
+    const elImg = new Image();
+    elImg.src = img.url
+    resizeCanvasByCont()
+    drawImg(elImg)
 }
 
-
-// function drawImgFromlocal() {
-//     var img = new Image()
-//     img.src = '/img/2.jpg';
-//     img.onload = () => {
-//         gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height) //img,x,y,xend,yend
-//     }
-// }
-
-function drawImg(imgUrl) {
-    const img = new Image();
+function drawImg(img) {
     img.onload = () => {
         gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height);
-        drawText('hey', gCanvas.width/2, 40)
+        drawLines()
     }
-    img.src = imgUrl;
 }
 
 
-// function renderCanvas(img) {
-//     gCanvas.width = img.width;
-//     gCanvas.height = img.height;
-//     gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height);
-// }
+function drawLines() {
+    let lines = gMeme.lines
+    lines.forEach((line, idx) => {
+        let fontDetails = getFontDetails(line.size)
+        drawText(line.txt, fontDetails, line.pos.x, line.pos.y)
+        if (idx===gMeme.selectedLineIdx & !gIsDoneEdit) {
+            markLine(line)
+        }
 
-function draw(ev) {
-    // console.log(gCanvas);
-    const { offsetX, offsetY } = ev;
-    drawText('sdsdsd', offsetX, offsetY)
+    })
+
 }
 
-function drawText(text, x, y) {
-    gCtx.font = '40px impact';
+
+function markLine(line) {
+    gCtx.globalCompositeOperation = "multiply";
+    gCtx.font = "40px sans-serif";
+    gCtx.rect(0, line.pos.y - line.size, gCanvas.width, line.pos.y + line.size);
+    gCtx.strokeStyle = '#aaa';
+    gCtx.stroke();
+    gCtx.fillStyle = "#ddd";
+    gCtx.fillRect(0, line.pos.y - line.size, gCanvas.width, line.pos.y + line.size );
+
+}
+
+
+function getFontDetails(size) {
+    let fontFamily = gMeme.selectedFont
+    return `${size}px ${fontFamily}`
+}
+
+
+
+
+function resizeCanvasByImg(img) {
+    gCanvas.width = img.width;
+    gCanvas.height = img.height;
+
+}
+
+
+function drawText(text, fontDetails, x, y) {
+    gCtx.font = fontDetails;
     gCtx.lineWidth = '2';
-    
+
     gCtx.strokeStyle = 'black';
     gCtx.fillStyle = 'white';
-    
+
     gCtx.textAlign = 'center';
     gCtx.fillText(text, x, y);
     gCtx.strokeText(text, x, y);
 }
 
 
-function resizeCanvas() {
+function resizeCanvasByCont() {
 
     const elContainer = document.querySelector('.canvas-container');
     gCanvas.width = elContainer.offsetWidth;
@@ -81,12 +100,12 @@ function clearCanvas() {
     gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height);
 }
 
-function onOpenEdit(elImg) {
+function onOpenEdit() {
     const elHomePage = document.querySelector('.home-page');
     const elEditPage = document.querySelector('.edit-page');
     elHomePage.classList.add('hidden')
     elEditPage.classList.remove('hidden')
-    initCanvas()   
+
 }
 
 function onCloseEdit() {
@@ -96,6 +115,36 @@ function onCloseEdit() {
     elEditPage.classList.add('hidden')
 }
 
-function onSetgMeme(elImg) {
-    setgMeme(imdId)
+function onStartMeme(imgId) {
+    setNewgMeme(imgId)
+    onOpenEdit()
+    rendergMeme()
+}
+
+function onChangeLineTxt(elLine) {
+    changeLine(elLine.value)
+    rendergMeme()
+
+}
+
+function onIncFontSize() {
+    incFontSize()
+    rendergMeme()
+}
+
+
+function onDecFontSize() {
+    decFontSize()
+    rendergMeme()
+}
+
+
+function onIncLinePos() {
+    incLinePos()
+    rendergMeme()
+}
+
+function onDecLinePos() {
+    decLinePos()
+    rendergMeme()
 }

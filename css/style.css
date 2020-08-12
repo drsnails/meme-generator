@@ -7,11 +7,6 @@
     /* font-style: normal; */
 }
 
-@font-face {
-    font-family: 'impact';
-    src: url(../fonts/Impact/Impact-400.ttf);
-}
-
 /* HELPERS */
 
 .hidden {
@@ -62,7 +57,6 @@ header {
     border-radius: 37px;
     /* padding: 10px; */
     margin: 10px auto 10px auto;
-    
 }
 
 .nav-bar-header {
@@ -87,21 +81,40 @@ header {
 
 .search-bar {
     display: flex;
+    /* align-items: center; */
     padding: 8px;
     justify-content: space-evenly;
 }
 
+.search-input-sec {
+    width: 35%;
+    height: 40px;
+}
+
 .search-input {
-    width: 43%;
+    width: 70%;
+    height: 40px;
     border: 0;
+    margin-right: 10px;
     background-color: #22252c;
     border-radius: 25px;
     color: #fefefe;
 }
 
+.fa-search {
+    font-size: 25px;
+    
+    
+    
+    color: rgb(47, 255, 168)
+}
+
 .key-words {
+    display: flex;
+    justify-content: space-evenly;
     box-shadow: 0 3px 6px 1px rgba(0, 0, 0, 0.15);
     border-radius: 25px;
+    width: 35%;
     background-color: #fefefe7c;
     padding: 0 10px 0;
 }
@@ -123,26 +136,21 @@ header {
 .grid .img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     cursor: pointer;
     /* grid-row: span 3;
     grid-column: span 40; */
 }
 
-
-
 /* EDIT PAGE */
 
 .edit-page {
-    
-    
     /* width: 100%; */
     margin: 0 auto;
     width: 100%;
     height: 100vh;
     background-color: #22252c;
     /* top: 0%; */
-    
 }
 
 .wrap-container {
@@ -158,30 +166,41 @@ header {
     display: inline-block;
     /* border: 1px solid white; */
     /* background-color: tomato; */
-    width: 350px;
-    height: 350px;
+    font-family: Impact;
+    width: 400px;
+    height: 400px;
     margin: 0 20px 0 0;
-    
 }
 
 .edit-container {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    
-    background-color: rgb(197, 192, 191);
-    width: 350px;
-    height: 350px;
+    background-color: #383b42;
+    width: 400px;
+    height: 400px;
     margin: 0 0 0 20px;
     /* height: 100%; */
 }
-
-
 
 .line-edit {
     display: flex;
     /* margin: 0 auto; */
     justify-content: space-evenly;
+}
+
+.input-txt {
+    margin: 0 2rem;
+    outline: none;
+    box-shadow: 1px 5px 0 #bbc4d1, inset 0 5px 0 #ffffff;
+    border-radius: 28px;
+    padding: 10px;
+    background-color: #ebeef3;
+    color: #3d3d3d;
+    font-family: poppins-reg;
+    font-size: 25px;
+    font-weight: 500;
+    text-transform: uppercase;
 }
 
 .text-edit {
@@ -200,4 +219,13 @@ header {
 
 .font-size {
     text-decoration: underline;
+}
+
+.edit-btn {
+    cursor: pointer;
+}
+
+.edit-btn:active { 
+    color: hotpink;
+
 }
