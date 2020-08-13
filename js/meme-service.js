@@ -35,7 +35,8 @@ function createLine() {
         txt: '"Somthing funny"',
         size: 35,
         align: 'center',
-        color: 'black',
+        color: 'white',
+        strokeColor: 'black'
     }
 
     return line
@@ -69,31 +70,31 @@ function getFont() {
 }
 
 function changeLineTxt(text) {
-    let currLine = getSelectedLine()
-    currLine.txt = text
+    let selectedLine = getSelectedLine()
+    selectedLine.txt = text
 
 }
 
 
 function incFontSize() {
-    let currLine = getSelectedLine()
-    currLine.size++
+    let selectedLine = getSelectedLine()
+    selectedLine.size++
 }
 
 function decFontSize() {
-    let currLine = getSelectedLine()
-    currLine.size--
+    let selectedLine = getSelectedLine()
+    selectedLine.size--
 }
 
 
 function incLinePos() {
-    let currLine = getSelectedLine()
-    currLine.pos.y -= 5
+    let selectedLine = getSelectedLine()
+    selectedLine.pos.y -= 5
 }
 
 function decLinePos() {
-    let currLine = getSelectedLine()
-    currLine.pos.y += 5
+    let selectedLine = getSelectedLine()
+    selectedLine.pos.y += 5
 }
 
 function addLine() {
@@ -116,8 +117,8 @@ function addLine() {
 }
 
 function deleteLine() {
-    let currLineIdx = gMeme.selectedLineIdx
-    gMeme.lines.splice(currLineIdx, 1)
+    let selectedLineIdx = gMeme.selectedLineIdx
+    gMeme.lines.splice(selectedLineIdx, 1)
     gMeme.selectedLineIdx =gMeme.lines.length-1
 }
 
@@ -128,8 +129,8 @@ function setFontFamily(font) {
 }
 function toggleLine() {
     let linesLen = gMeme.lines.length
-    let currLineIdx = gMeme.selectedLineIdx
-    gMeme.selectedLineIdx = (currLineIdx + 1 === linesLen) ? 0 : currLineIdx + 1
+    let selectedLineIdx = gMeme.selectedLineIdx
+    gMeme.selectedLineIdx = (selectedLineIdx + 1 === linesLen) ? 0 : selectedLineIdx + 1
 }
 
 function getSelectedLineTxt() {
@@ -139,25 +140,25 @@ function getSelectedLineTxt() {
 }
 
 function changeLineTxtAlign(alignDir) {
-    let currLine = getSelectedLine()
-    currLine.align = alignDir
+    let selectedLine = getSelectedLine()
+    selectedLine.align = alignDir
 }
 
-function setLinePosAndAlign(currLine) {
+function setLinePosAndAlign(selectedLine) {
     
-    switch (currLine.align) {
+    switch (selectedLine.align) {
         case 'left':
-            currLine.pos.x = 5
-            currLine.align = 'start'
+            selectedLine.pos.x = 5
+            selectedLine.align = 'start'
             return 
         case 'right':
-            currLine.pos.x = gCanvas.width-5
-            currLine.align = 'end'
+            selectedLine.pos.x = gCanvas.width-5
+            selectedLine.align = 'end'
             return 
         
         case 'center':
-            currLine.pos.x = gCanvas.width/2
-            currLine.align = 'center'
+            selectedLine.pos.x = gCanvas.width/2
+            selectedLine.align = 'center'
             return
     }
 }
@@ -167,10 +168,25 @@ function setLinePosAndAlign(currLine) {
 
 function getSelectedLine() {
     let lineIdx = gMeme.selectedLineIdx
-    let currLine = gMeme.lines[lineIdx]
-    return currLine
+    let selectedLine = gMeme.lines[lineIdx]
+    return selectedLine
 }
 
 function resetLineTxt(){
-    gMeme.lines[0].txt = ''
+    let selectedLine = gMeme.lines[0]
+    selectedLine.txt = ''
+    selectedLine.pos.y = selectedLine.size
 }
+
+function changeStrokeColor(color) {
+    let selectedLine = getSelectedLine()
+    selectedLine.strokeColor = color
+
+}
+
+function changeFillColor(color) {
+    let selectedLine = getSelectedLine()
+    selectedLine.color = color
+
+}
+

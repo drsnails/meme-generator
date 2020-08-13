@@ -24,12 +24,14 @@
 
 button {
     color: white;
-    background-color: rgb(116, 223, 164);
+    background-color: transparent;
     outline: none;
     padding: 5px;
     border: 0;
     cursor: pointer;
 }
+
+
 
 input {
     outline: none;
@@ -66,6 +68,10 @@ header {
     margin: 10px auto 10px auto;
 }
 
+header button {
+    margin: 0 20px;
+}
+
 .nav-bar-header {
     display: flex;
     width: 100%;
@@ -88,6 +94,7 @@ header {
 
 .search-bar {
     display: flex;
+    display: none;
     /* align-items: center; */
     padding: 8px;
     justify-content: space-evenly;
@@ -304,7 +311,17 @@ header {
     box-shadow: 1px 6px 0 #632687, inset 0 5px 0 #a464ec;
     border-radius: 15px;
     background-color: #8f44bb;
+    
+    
+    
 }
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+
 
 .stroke-color {
     padding: 20px;
@@ -348,4 +365,8 @@ header {
 
 .edit-btn:active {
     color: hotpink;
+}
+
+.download {
+    
 }
