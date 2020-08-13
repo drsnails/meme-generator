@@ -17,29 +17,40 @@ var gImgs = [
     { id: 12, url: 'img/img-squares/12.jpg', keywords: ['happy'] },
     { id: 13, url: 'img/img-squares/13.jpg', keywords: ['happy'] },
 ];
+var gMeme = createMeme()
 
 
-
-var gMeme = {
-    selectedImgId: 3,
-    selectedLineIdx: 0,
-    selectedFont: 'Impact',
-    lines: [
-        {
-            txt: 'Something Didnt work',
-            size: 40,
-            align: 'left',
-            color: 'black',
-            pos: { x: 0, y: 40 }
-        }
-    ]
+function createMeme(imgId=1) {
+    let meme = {
+        selectedImgId: imgId,
+        selectedLineIdx: 0,
+        selectedFont: 'Impact',
+        lines: [createLine()]
+    }
+    return meme
 }
+
+function createLine() {
+    let line = {
+        txt: '"Somthing funny"',
+        size: 35,
+        align: 'center',
+        color: 'black',
+    }
+
+    return line
+
+}
+
 
 function getImg() {
     let imgId = gMeme.selectedImgId
     let img = getImgById(imgId)
     return img
 }
+
+
+
 
 function getImgById(imgId) {
     let img = gImgs.find((Img) => {
@@ -48,23 +59,6 @@ function getImgById(imgId) {
     return img
 }
 
-function createMeme(imgId) {
-    let meme = {
-        selectedImgId: imgId,
-        selectedLineIdx: 0,
-        selectedFont: 'Impact',
-        lines: [
-            {
-                txt: 'Type something',
-                size: 40,
-                align: 'left',
-                color: 'black',
-                pos: { x: gCanvas.width +200, y: 40}
-            }
-        ]
-    }
-    return meme
-}
 
 function setNewgMeme(imgId) {
     gMeme = createMeme(imgId)
@@ -74,36 +68,109 @@ function getFont() {
     return font
 }
 
-function changeLine(text) {
-    let lineIdx = gMeme.selectedLineIdx
-    let currLine = gMeme.lines[lineIdx]
+function changeLineTxt(text) {
+    let currLine = getSelectedLine()
     currLine.txt = text
-           
+
 }
 
 
 function incFontSize() {
-    let lineIdx = gMeme.selectedLineIdx
-    let currLine = gMeme.lines[lineIdx]
+    let currLine = getSelectedLine()
     currLine.size++
 }
 
 function decFontSize() {
-    let lineIdx = gMeme.selectedLineIdx
-    let currLine = gMeme.lines[lineIdx]
+    let currLine = getSelectedLine()
     currLine.size--
 }
 
 
 function incLinePos() {
-    let lineIdx = gMeme.selectedLineIdx
-    let currLine = gMeme.lines[lineIdx]
-    currLine.pos.y--
+    let currLine = getSelectedLine()
+    currLine.pos.y -= 5
 }
 
 function decLinePos() {
-    let lineIdx = gMeme.selectedLineIdx
-    let currLine = gMeme.lines[lineIdx]
-    currLine.pos.y++
+    let currLine = getSelectedLine()
+    currLine.pos.y += 5
 }
 
+function addLine() {
+    let lines = gMeme.lines
+    let lineLen = lines.length
+    let line = createLine()
+    let linePosY;
+
+    if (lineLen === 0) {
+        linePosY = line.size
+    } else if (lineLen === 1) {
+        linePosY = gCanvas.height - line.size
+    } else {
+        linePosY = lineLen*line.size
+    }
+
+    line['pos'] = { x: gCanvas.width / 2, y: linePosY }
+    lines.push(line)
+    toggleLine()
+}
+
+function deleteLine() {
+    let currLineIdx = gMeme.selectedLineIdx
+    gMeme.lines.splice(currLineIdx, 1)
+    gMeme.selectedLineIdx =gMeme.lines.length-1
+}
+
+
+
+function setFontFamily(font) {
+    gMeme.selectedFont = font
+}
+function toggleLine() {
+    let linesLen = gMeme.lines.length
+    let currLineIdx = gMeme.selectedLineIdx
+    gMeme.selectedLineIdx = (currLineIdx + 1 === linesLen) ? 0 : currLineIdx + 1
+}
+
+function getSelectedLineTxt() {
+    let selectedLineIdx = gMeme.selectedLineIdx
+    let lineTxt = gMeme.lines[selectedLineIdx].txt
+    return lineTxt
+}
+
+function changeLineTxtAlign(alignDir) {
+    let currLine = getSelectedLine()
+    currLine.align = alignDir
+}
+
+function setLinePosAndAlign(currLine) {
+    
+    switch (currLine.align) {
+        case 'left':
+            currLine.pos.x = 5
+            currLine.align = 'start'
+            return 
+        case 'right':
+            currLine.pos.x = gCanvas.width-5
+            currLine.align = 'end'
+            return 
+        
+        case 'center':
+            currLine.pos.x = gCanvas.width/2
+            currLine.align = 'center'
+            return
+    }
+}
+
+
+
+
+function getSelectedLine() {
+    let lineIdx = gMeme.selectedLineIdx
+    let currLine = gMeme.lines[lineIdx]
+    return currLine
+}
+
+function resetLineTxt(){
+    gMeme.lines[0].txt = ''
+}

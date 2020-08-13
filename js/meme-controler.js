@@ -10,10 +10,11 @@ window.addEventListener('resize', function () {
 function initCanvas() {
     gCanvas = document.getElementById('myCanvas');
     gCtx = gCanvas.getContext('2d');
-
-    rendergMeme()
-
+    
 }
+
+
+
 
 
 
@@ -21,12 +22,16 @@ function rendergMeme() {
     let img = getImg()
 
     const elImg = new Image();
-    elImg.src = img.url
     resizeCanvasByCont()
     drawImg(elImg)
+    elImg.src = img.url
+    
+    if (gMeme.lines.length) renderLineTxtInput()
+    
 }
 
 function drawImg(img) {
+
     img.onload = () => {
         gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height);
         drawLines()
@@ -35,11 +40,16 @@ function drawImg(img) {
 
 
 function drawLines() {
+    // fix to function getLines()
     let lines = gMeme.lines
     lines.forEach((line, idx) => {
+
+        setLinePosAndAlign(line)
+
         let fontDetails = getFontDetails(line.size)
-        drawText(line.txt, fontDetails, line.pos.x, line.pos.y)
-        if (idx===gMeme.selectedLineIdx & !gIsDoneEdit) {
+        line.pos
+        drawText(line.txt, line.align, fontDetails, line.pos.x, line.pos.y)
+        if (idx === gMeme.selectedLineIdx & !gIsDoneEdit) {
             markLine(line)
         }
 
@@ -48,14 +58,27 @@ function drawLines() {
 }
 
 
+function drawText(text, alignDir, fontDetails, x, y) {
+    gCtx.strokeStyle = 'black';
+    gCtx.fillStyle = 'white';
+    gCtx.font = fontDetails;
+    gCtx.lineWidth = '2';
+
+
+    gCtx.textAlign = alignDir;
+    gCtx.fillText(text, x, y);
+    gCtx.strokeText(text, x, y);
+}
+
+
 function markLine(line) {
     gCtx.globalCompositeOperation = "multiply";
-    gCtx.font = "40px sans-serif";
-    gCtx.rect(0, line.pos.y - line.size, gCanvas.width, line.pos.y + line.size);
+    gCtx.rect(0, line.pos.y + line.size/8, gCanvas.width, -line.size);
     gCtx.strokeStyle = '#aaa';
     gCtx.stroke();
     gCtx.fillStyle = "#ddd";
-    gCtx.fillRect(0, line.pos.y - line.size, gCanvas.width, line.pos.y + line.size );
+    gCtx.fillRect(0, line.pos.y + line.size/8, gCanvas.width, -line.size);
+    gCtx.globalCompositeOperation = "source-over";
 
 }
 
@@ -68,6 +91,8 @@ function getFontDetails(size) {
 
 
 
+
+
 function resizeCanvasByImg(img) {
     gCanvas.width = img.width;
     gCanvas.height = img.height;
@@ -75,17 +100,7 @@ function resizeCanvasByImg(img) {
 }
 
 
-function drawText(text, fontDetails, x, y) {
-    gCtx.font = fontDetails;
-    gCtx.lineWidth = '2';
 
-    gCtx.strokeStyle = 'black';
-    gCtx.fillStyle = 'white';
-
-    gCtx.textAlign = 'center';
-    gCtx.fillText(text, x, y);
-    gCtx.strokeText(text, x, y);
-}
 
 
 function resizeCanvasByCont() {
@@ -119,10 +134,11 @@ function onStartMeme(imgId) {
     setNewgMeme(imgId)
     onOpenEdit()
     rendergMeme()
+    initLinePos()
 }
 
 function onChangeLineTxt(elLine) {
-    changeLine(elLine.value)
+    changeLineTxt(elLine.value)
     rendergMeme()
 
 }
@@ -148,3 +164,46 @@ function onDecLinePos() {
     decLinePos()
     rendergMeme()
 }
+
+function onAddLine() {
+    addLine()
+    rendergMeme()
+}
+
+function onSetFontFamily(elFontFam) {
+    setFontFamily(elFontFam.value)
+    rendergMeme()
+}
+
+function onToggleLine() {
+    if (!gMeme.lines.length) return
+    toggleLine()
+    rendergMeme()
+}
+
+function renderLineTxtInput() {
+    let elInputTxt = document.querySelector('.input-txt');
+    let lineTxt = getSelectedLineTxt()
+    elInputTxt.value = lineTxt
+}
+
+function onChangeLineTxtAlign(alignDir) {
+    changeLineTxtAlign(alignDir)
+    rendergMeme()
+}
+
+function initLinePos() {
+    let line = gMeme.lines[0]
+    line['pos'] = { x: gCanvas.width / 2, y: line.size }
+}
+
+function onDeleteLine() {
+    if (gMeme.lines.length === 1) {
+        resetLineTxt() 
+        rendergMeme()
+        return
+    }
+    deleteLine()
+    rendergMeme()
+}
+

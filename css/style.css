@@ -7,6 +7,13 @@
     /* font-style: normal; */
 }
 
+@font-face {
+    font-family: 'poppins-bold';
+    src: url("../fonts/Poppins/Poppins-Bold.ttf") format("truetype");
+    /* font-weight: 1000; */
+    /* font-style: normal; */
+}
+
 /* HELPERS */
 
 .hidden {
@@ -103,9 +110,6 @@ header {
 
 .fa-search {
     font-size: 25px;
-    
-    
-    
     color: rgb(47, 255, 168)
 }
 
@@ -132,12 +136,18 @@ header {
     padding: 2rem;
     margin: 20px auto;
 }
+.meme-img {
+    
+}
 
-.grid .img {
+.grid img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
     cursor: pointer;
+    border-radius: 13px;
+    box-shadow: -1px 0px 3px 0px rgba(0, 0, 0, 0.747);
+
     /* grid-row: span 3;
     grid-column: span 40; */
 }
@@ -162,31 +172,56 @@ header {
     justify-content: center;
 }
 
+
+
 .canvas-container {
     display: inline-block;
     /* border: 1px solid white; */
     /* background-color: tomato; */
     font-family: Impact;
     width: 400px;
-    height: 400px;
-    margin: 0 20px 0 0;
+    height: 420px;
+    margin: 20px 20px 0 0;
+    
+}
+
+#myCanvas {
+    border-radius: 15px;
 }
 
 .edit-container {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    background-color: #383b42;
+    /* background-color: #383b42; */
     width: 400px;
-    height: 400px;
-    margin: 0 0 0 20px;
+    height: 420px;
+    margin: 20px 0 0 20px;
     /* height: 100%; */
+    /* Style for "Frame" */
+    
+    box-shadow: 1px 3px 0 #bbc4d142, inset 0 3px 0 #a3a3a360;
+    border-radius: 15px;
+    background-color: #ebeef318;
 }
 
 .line-edit {
     display: flex;
     /* margin: 0 auto; */
-    justify-content: space-evenly;
+    justify-content: center;
+}
+
+.line-edit>* {
+    text-align: center;
+    /* height: 40px;
+    width: 40px; */
+    margin: 0 13px;
+    padding: 10px 12px;
+    box-shadow: 1px 5px 0 rgba(92, 92, 92, 0.55), inset 0 5px 0 rgba(255, 255, 255, 0.58);
+    border-radius: 10px;
+    background-color: #ffffff;
+    color: black;
+    cursor: pointer;
 }
 
 .input-txt {
@@ -200,12 +235,50 @@ header {
     font-family: poppins-reg;
     font-size: 25px;
     font-weight: 500;
-    text-transform: uppercase;
 }
 
 .text-edit {
     display: flex;
+    width: 80%;
+    flex-wrap: wrap;
+    margin: 0 auto;
     justify-content: space-evenly;
+    align-items: center;
+    align-content: center;
+    background-color: #19a59f;
+    padding: 2px;
+    border-radius: 10px;
+}
+
+.text-edit>* {
+    /* background-color: hotpink; */
+    margin: 5px 10px;
+    cursor: pointer;
+}
+
+.text-edit>div {
+    text-align: center;
+    /* height: 40px;
+    width: 40px; */
+    padding: 10px;
+    box-shadow: 1px 5px 0 rgba(92, 92, 92, 0.55), inset 0 5px 0 rgba(255, 255, 255, 0.58);
+    border-radius: 10px;
+    background-color: #ffffff;
+    color: black;
+    cursor: pointer;
+}
+
+.text-edit select {
+    flex-grow: 1;
+    height: 40px;
+    box-shadow: 1px 5px 0 rgba(92, 92, 92, 0.55), inset 0 5px 0 rgba(255, 255, 255, 0.58);
+    border-radius: 10px;
+    background-color: #ffffff;
+    color: #22252c;
+    font-family: "poppins-reg";
+    font-size: 20px;
+    font-weight: 600;
+    outline: none;
 }
 
 .icons {
@@ -217,15 +290,62 @@ header {
     justify-content: space-evenly;
 }
 
-.font-size {
-    text-decoration: underline;
+.share-btn {
+    width: 110px;
+    height: 41px;
+    box-shadow: 1px 3px 0 #165c9c, inset 0 3px 0 #689be7;
+    border-radius: 15px;
+    background-color: #1e7cd3;
+}
+
+.download-btn {
+    width: 110px;
+    height: 41px;
+    box-shadow: 1px 6px 0 #632687, inset 0 5px 0 #a464ec;
+    border-radius: 15px;
+    background-color: #8f44bb;
+}
+
+.stroke-color {
+    padding: 20px;
+    box-shadow: 1px 5px 0 rgba(92, 92, 92, 0.55), inset 0 5px 0 rgba(255, 255, 255, 0.58);
+    border-radius: 10px;
+}
+
+.stroke-color::before {
+    content: '\f1fc';
+    font-family: FontAwesome;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 20px;
+    position: relative;
+    bottom: 9px;
+    right: 9px;
+    text-decoration: none;
+}
+
+.text-color {
+    padding: 20px;
+    box-shadow: 1px 5px 0 rgba(92, 92, 92, 0.55), inset 0 5px 0 rgba(255, 255, 255, 0.58);
+    border-radius: 10px;
+}
+
+.text-color::before {
+    content: '\f53f';
+    font-family: FontAwesome;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 20px;
+    position: relative;
+    bottom: 9px;
+    right: 9px;
+    text-decoration: none;
 }
 
 .edit-btn {
     cursor: pointer;
 }
 
-.edit-btn:active { 
+.edit-btn:active {
     color: hotpink;
-
 }
