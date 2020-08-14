@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body onload="initCanvas()">
+    <a name="top"></a>
     <header>
         <nav class="nav-bar-header container">
             <span>Logo</span>
@@ -43,6 +44,12 @@
                 <div class="meme-img" ><img onclick="onStartMeme(10)" class="img" src="img/img-squares/10.jpg" alt=""></div>
                 <div class="meme-img" ><img onclick="onStartMeme(11)" class="img" src="img/img-squares/11.jpg" alt=""></div>
                 <div class="meme-img" ><img onclick="onStartMeme(12)" class="img" src="img/img-squares/12.jpg" alt=""></div>
+                <div class="meme-img" ><img onclick="onStartMeme(13)" class="img" src="img/img-squares/13.jpg" alt=""></div>
+                <div class="meme-img" ><img onclick="onStartMeme(14)" class="img" src="img/img-squares/14.jpg" alt=""></div>
+                <div class="meme-img" ><img onclick="onStartMeme(15)" class="img" src="img/img-squares/15.jpg" alt=""></div>
+                <div class="meme-img" ><img onclick="onStartMeme(16)" class="img" src="img/img-squares/16.jpg" alt=""></div>
+                <div class="meme-img" ><img onclick="onStartMeme(17)" class="img" src="img/img-squares/17.jpg" alt=""></div>
+                <div class="meme-img" ><img onclick="onStartMeme(18)" class="img" src="img/img-squares/18.jpg" alt=""></div>
                 
             </div>
         </main>
@@ -52,7 +59,7 @@
     <div class="edit-page hidden">
         <div class="wrap-container">
             <div class="canvas-container">
-                <canvas class="myCanvas" id="myCanvas" onmousedown="handleMouseDrag(event)" onmouseup="handleMouseDrag(event)" height="420" width="400">
+                <canvas class="myCanvas" id="myCanvas" ontouchstart="handleTouch(event)" ontouchend="handleTouch(event)" onmousedown="handleMouseDrag(event)" onmouseup="handleMouseDrag(event)" ont height="420" width="400">
                 </canvas>
                 
                 
@@ -99,7 +106,7 @@
             </div>
 
 
-
+            <a class="top-page" href="#top" hidden></a>
         </div>
     </div>
     <script src="https://kit.fontawesome.com/9ca7f01aba.js" crossorigin="anonymous"></script>

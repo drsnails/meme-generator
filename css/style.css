@@ -141,6 +141,7 @@ header button {
 .gallery-container {
     padding: 2rem;
     margin: 20px auto;
+    height: 100%;
 }
 
 .meme-img {}
@@ -393,6 +394,7 @@ a {
     .wrap-container {
         display: flex;
         flex-direction: column;
+        width: 90vw;
     }
     header {
         width: 90%;
@@ -400,6 +402,7 @@ a {
     }
     .canvas-container {
         margin: 90px auto 0 auto;
+        height: 390px;
     }
     .edit-container {
         margin-left: auto;
@@ -494,6 +497,17 @@ a {
     .edit-container {
         margin-top: 13px;
     }
+
+    .canvas-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 390px;
+        margin-top: 50px;
+        /* width: 320px; */
+        padding: 0px;
+        
+    }
     .myCanvas {
         height: 380px;
         width: 380px;
@@ -531,9 +545,9 @@ a {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        margin: 10px auto 0 auto;
+        margin: 0 auto;
         padding: 0px;
-        height: 350px;
+        height: 330px;
         width: 320px;
     }
     .share-btn {

@@ -15,10 +15,15 @@ var gImgs = [
     { id: 10, url: 'img/img-squares/10.jpg', keywords: ['happy'] },
     { id: 11, url: 'img/img-squares/11.jpg', keywords: ['happy'] },
     { id: 12, url: 'img/img-squares/12.jpg', keywords: ['happy'] },
+    { id: 13, url: 'img/img-squares/13.jpg', keywords: ['happy'] },
+    { id: 14, url: 'img/img-squares/14.jpg', keywords: ['happy'] },
+    { id: 15, url: 'img/img-squares/15.jpg', keywords: ['happy'] },
+    { id: 16, url: 'img/img-squares/16.jpg', keywords: ['happy'] },
+    { id: 17, url: 'img/img-squares/17.jpg', keywords: ['happy'] },
+    { id: 18, url: 'img/img-squares/18.jpg', keywords: ['happy'] },
 ];
+
 var gMeme = createMeme()
-
-
 function createMeme(imgId = 1) {
     let meme = {
         selectedImgId: imgId,
