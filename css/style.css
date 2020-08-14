@@ -133,8 +133,8 @@ header button {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     /* grid-template-rows: repeat(9, 173px); */
-    height: 100vh;
     grid-auto-rows: 200px;
+    height: 100vh;
     gap: 20px;
 }
 
@@ -152,8 +152,7 @@ header button {
     cursor: pointer;
     border-radius: 13px;
     box-shadow: -1px 0px 3px 0px rgba(0, 0, 0, 0.747);
-    /* grid-row: span 3;
-    grid-column: span 40; */
+    
 }
 
 /* EDIT PAGE */
@@ -485,11 +484,12 @@ a {
 }
 
 @media only screen and (max-width: 520px) {
+
+
+
     .grid {
         display: grid;
         grid-template-columns: repeat(2, minmax(150px, 1fr));
-        /* grid-template-rows: repeat(9, 173px); */
-        height: 100vh;
         grid-auto-rows: 150px;
         gap: 20px;
     }
@@ -503,7 +503,6 @@ a {
         justify-content: center;
         height: 390px;
         margin-top: 50px;
-        /* width: 320px; */
         padding: 0px;
         
     }
@@ -517,10 +516,9 @@ a {
 @media only screen and (max-width: 492px) {
     .grid {
         display: grid;
-        grid-template-columns: repeat(2, minmax(150px, 1fr));
-        /* grid-template-rows: repeat(9, 173px); */
-        height: 100vh;
-        grid-auto-rows: 150px;
+        grid-template-columns: repeat(2, minmax(130px, 1fr));
+        
+        grid-auto-rows: 130px;
         gap: 20px;
     }
     .wrap-container {
