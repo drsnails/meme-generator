@@ -48,8 +48,8 @@ function drawLines(img) {
         let fontDetails = getFontDetails(line.size)
         line.pos
         drawText(line.txt, line.align, line.color, line.strokeColor, fontDetails, line.pos.x, line.pos.y)
-        
-        
+
+
         if (idx === gMeme.selectedLineIdx) {
             markLine(line)
         }
@@ -76,31 +76,29 @@ function drawText(text, alignDir, fillColor, strokeColor, fontDetails, x, y) {
 }
 
 
-
-
 function markLine(line) {
     if (gIsDownload) return
     var t = gCtx.measureText(line.text)
-        
+
     gCtx.globalCompositeOperation = "multiply";
     gCtx.rect(0, line.pos.y + line.size / 8, gCanvas.width, -line.size);
-    
+
     gCtx.strokeStyle = '#aaa';
     gCtx.stroke();
     gCtx.fillStyle = "#ddd";
     gCtx.fillRect(0, line.pos.y + line.size / 8, gCanvas.width, -line.size);
     gCtx.globalCompositeOperation = "source-over";
-    
+
 }
 
 
 function handleMouseDrag(ev) {
     if (ev.type === 'mousedown') {
+        onSelectCLickedLine(ev)
         onMouseDown()
     }
 
     if (ev.type === 'mouseup') {
-        initPositions()
         gIsMouseDown = false
     }
 }
@@ -110,18 +108,29 @@ function onMouseDown() {
     if (gIsMouseDown) return
     gIsMouseDown = true
     const elMyCanvas = document.querySelector('.canvas-container');
-    elMyCanvas.onmousemove = onDraw;
+    elMyCanvas.onmousemove = onDrag;
 }
 
+function onDrag(event) {
+    if (!gIsMouseDown) return;
+    let offsetY
+    ({ offsetY } = event)
+    setTextPosition(offsetY)
+    rendergMeme()
+
+}
+
+function onSelectCLickedLine(ev) {
+    let offsetX, offsetY;
+    ({ offsetX, offsetY } = ev)
+    selectClickedLine({ offsetX, offsetY })
+    rendergMeme()
+}
 
 function getFontDetails(size) {
     let fontFamily = gMeme.selectedFont
     return `${size}px ${fontFamily}`
 }
-
-
-
-
 
 
 function resizeCanvasByImg(img) {
@@ -130,12 +139,7 @@ function resizeCanvasByImg(img) {
 
 }
 
-
-
-
-
 function resizeCanvasByCont() {
-
     const elContainer = document.querySelector('.canvas-container');
     gCanvas.width = elContainer.offsetWidth;
     gCanvas.height = elContainer.offsetHeight;
@@ -263,7 +267,7 @@ function onDownloadImg() {
     gIsDownload = true
     rendergMeme()
     setTimeout(() => {
-        var url = gCanvas.toDataURL('image2/jpg', 1.0);        
+        var url = gCanvas.toDataURL('image2/jpg', 1.0);
         var link = document.getElementById("dn-link")
         link.href = url
         link.click()
@@ -273,16 +277,16 @@ function onDownloadImg() {
 }
 
 
-function onClickLine(ev) {
-    // console.log('offsetX', ev.offsetX);
-    // console.log('offsetY', ev.offsetY);
+// function onClickLine(ev) {
+//     // console.log('offsetX', ev.offsetX);
+//     // console.log('offsetY', ev.offsetY);
 
-    let offsetX, offsetY;
-    ({offsetX, offsetY} = ev)
-    selectClickedLine({offsetX, offsetY})
-    rendergMeme()
+//     let offsetX, offsetY;
+//     ({offsetX, offsetY} = ev)
+//     selectClickedLine({offsetX, offsetY})
+//     rendergMeme()
 
-    // let line = getSelectedLine()
-    // console.log(`\n\nline size: ${line.size}\ny pos: ${line.pos.y}`);
-    
-}
+//     // let line = getSelectedLine()
+//     // console.log(`\n\nline size: ${line.size}\ny pos: ${line.pos.y}`);
+
+// }

@@ -206,6 +206,9 @@ function selectClickedLine({ offsetX, offsetY }) {
 }
 
 
-
+function setTextPosition(offsetY) {
+    let selectedLine = getSelectedLine()
+    selectedLine.pos.y = offsetY
+}
 
 

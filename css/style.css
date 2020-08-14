@@ -31,8 +31,6 @@ button {
     cursor: pointer;
 }
 
-
-
 input {
     outline: none;
 }
@@ -144,9 +142,8 @@ header button {
     padding: 2rem;
     margin: 20px auto;
 }
-.meme-img {
-    
-}
+
+.meme-img {}
 
 .grid img {
     width: 100%;
@@ -155,7 +152,6 @@ header button {
     cursor: pointer;
     border-radius: 13px;
     box-shadow: -1px 0px 3px 0px rgba(0, 0, 0, 0.747);
-
     /* grid-row: span 3;
     grid-column: span 40; */
 }
@@ -180,17 +176,14 @@ header button {
     justify-content: center;
 }
 
-
-
 .canvas-container {
-    display: inline-block;
+    display: flex;
     /* border: 1px solid white; */
     /* background-color: tomato; */
     font-family: Impact;
     width: 400px;
     height: 420px;
     margin: 20px 20px 0 0;
-    
 }
 
 #myCanvas {
@@ -207,7 +200,6 @@ header button {
     margin: 20px 0 0 20px;
     /* height: 100%; */
     /* Style for "Frame" */
-    
     box-shadow: 1px 3px 0 #bbc4d142, inset 0 3px 0 #a3a3a360;
     border-radius: 15px;
     background-color: #ebeef318;
@@ -312,17 +304,12 @@ header button {
     box-shadow: 1px 6px 0 #632687, inset 0 5px 0 #a464ec;
     border-radius: 15px;
     background-color: #8f44bb;
-    
-    
-    
 }
 
 a {
     color: white;
     text-decoration: none;
 }
-
-
 
 .stroke-color {
     padding: 20px;
@@ -370,4 +357,155 @@ a {
 
 .myCanvas {
     cursor: pointer;
+}
+
+@media only screen and (max-width: 960px) {
+    html {
+        font-size: 12px;
+    }
+    .edit-container {
+        margin-left: auto;
+        margin-right: auto;
+        flex-direction: column;
+        justify-content: space-evenly;
+        /* max-width: 400px; */
+        /* height: 250px; */
+        border-radius: 15px;
+    }
+    .text-edit {
+        display: flex;
+        width: 90%;
+        /* flex-wrap: wrap;
+        margin: 0 auto;
+        justify-content: space-evenly;
+        align-items: center;
+        align-content: center;
+        background-color: #19a59f;
+        padding: 2px;
+        border-radius: 10px; */
+    }
+}
+
+@media only screen and (max-width: 840px) {
+    html {
+        font-size: 15px;
+    }
+
+    .wrap-container {
+        display: flex;
+        flex-direction: column;
+    }
+    header {
+        width: 90%;
+        height: 43px;
+    }
+    .canvas-container {
+        margin: 90px auto 0 auto;
+    }
+    .edit-container {
+        margin-left: auto;
+        margin-right: auto;
+        flex-direction: column;
+        justify-content: space-evenly;
+        max-width: 400px;
+        height: 240px;
+        border-radius: 15px;
+    }
+    .input-txt {
+        margin: 0.6rem 1.6rem 0;
+        outline: none;
+        box-shadow: 1px 3px 0 #bbc4d1, inset 0 5px 0 #ffffff;
+        border-radius: 13px;
+        padding: 2px;
+        background-color: #ebeef3;
+        color: #3d3d3d;
+        font-family: poppins-reg;
+        font-size: 20px;
+        font-weight: 500;
+    }
+    .text-edit>div {
+        text-align: center;
+        /* height: 40px;
+        width: 40px; */
+        padding: 6px;
+        box-shadow: 2px 2px 0 rgba(92, 92, 92, 0.55), inset 0 5px 0 rgba(255, 255, 255, 0.58);
+        border-radius: 6px;
+    }
+    .line-edit {
+        justify-content: center;   
+        padding: 10px;
+    }
+
+    .line-edit > * {
+        
+    }
+    .text-edit {
+        justify-content: space-around;
+        padding: 0px;
+    }
+    .text-edit>* {
+        cursor: pointer;
+        
+    }
+    .text-color, .stroke-color {
+        padding: 15px;
+        order: 2;
+        box-shadow: 2px 2px 0 rgba(92, 92, 92, 0.55), inset 0 5px 0 rgba(255, 255, 255, 0.58);
+    }
+    .text-edit select {
+        order: 2;
+        flex-basis: 50%;
+        height: 32px;
+        box-shadow: 2px 2px 0 rgba(92, 92, 92, 0.55), inset 0 5px 0 rgba(255, 255, 255, 0.58);
+    }
+    .share-btns {
+        display: flex;
+        margin: 0 auto;
+        /* justify-content: space-evenly; */
+        justify-content: center;
+        width: 90%;
+    }
+    .share-btn {
+        width: 90px;
+        height: 30px;
+        box-shadow: 1px 3px 0 #165c9c, inset 0 3px 0 #689be7;
+        border-radius: 8px;
+        background-color: #1e7cd3;
+        margin-right: 25%;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .download-btn {
+        width: 90px;
+        height: 30px;
+        box-shadow: 1px 3px 0 #632687, inset 0 3px 0 #a464ec;
+        border-radius: 8px;
+        background-color: #8f44bb;
+        margin-left: 25%;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+}
+
+@media only screen and (max-width: 520px) {
+
+    
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(150px, 1fr));
+        /* grid-template-rows: repeat(9, 173px); */
+        height: 100vh;
+        grid-auto-rows: 150px;
+        gap: 20px;
+    }
+    .edit-container {
+        margin-top: 13px;
+    }
+
+    .myCanvas {
+        height: 380px;
+        width: 380px;
+        margin: 0 auto;
+    }
 }
