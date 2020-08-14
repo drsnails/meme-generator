@@ -5,13 +5,42 @@ var gCtx;
 var gIsMouseDown = false
 var gIsDownload = false
 
-window.addEventListener('resize', function () {
-    // rendergMeme()
-})
 
 function initCanvas() {
     gCanvas = document.getElementById('myCanvas');
     gCtx = gCanvas.getContext('2d');
+    // rendergMeme()
+    renderImgs()
+    renderKeyWords()
+}
+
+
+function renderImgs() {
+    let imgs = getImgs()
+    let strHTMLs = imgs.map(img => {
+        return `
+        <div class="meme-img" >
+            <img onclick="onStartMeme(${img.id})" class="img img${img.id}" 
+            src="img/img-squares/${img.id}.jpg" alt="">
+        </div>
+        `
+
+    })
+    let elGalleryContainer = document.querySelector('.gallery-container');
+    elGalleryContainer.innerHTML = strHTMLs.join('')
+}
+
+function renderKeyWords() {
+    let keyWords = getKeyWords()
+    let strHTMLs = ``
+    let count = 0
+    for (let key in keyWords) {
+        count++
+        strHTMLs += `<span onclick="onSearchKey('${key}')" style="font-size: ${getFontSize(keyWords[key])}em">${key}</span>`
+        if (count >= 5) break
+    }
+    let elKeyWords = document.querySelector('.key-words');
+    elKeyWords.innerHTML = strHTMLs
 }
 
 function rendergMeme() {
@@ -43,14 +72,8 @@ function drawLines(img) {
         if (idx === gMeme.selectedLineIdx) {
             markLine(line)
         }
-
     })
-
-
 }
-
-
-
 
 function drawText(text, alignDir, fillColor, strokeColor, fontDetails, x, y) {
     gCtx.strokeStyle = strokeColor;
@@ -156,6 +179,7 @@ function getFontDetails(size) {
     let fontFamily = gMeme.selectedFont
     return `${size}px ${fontFamily}`
 }
+
 
 
 function resizeCanvasByImg(img) {
@@ -281,8 +305,6 @@ function onChangeFillColor(elFillColor) {
 }
 
 function onDownloadImg_(elLink) {
-    // rendergMeme()
-    // ev.preventDefault()
     var imgContent = gCanvas.toDataURL('image/jpg');
     elLink.href = imgContent
 
@@ -308,5 +330,40 @@ function goTopPage() {
     elTopPage.click()
 }
 
-// offsetX = ev.touches[0].pageX - ev.touches[0].target.offsetLeft;
-// offsetY = ev.touches[0].pageY - ev.touches[0].target.offsetTop;
+
+function filterImgs() {
+    return
+}
+
+function onSearch() {
+    let keyWord = document.querySelector('.search-input').value;
+    setFilterBy(keyWord)
+    updateKeyWords(keyWord)
+    renderKeyWords()
+    renderImgs()
+}
+
+function onChangeSearchVal() {
+    let elSearchInput = document.querySelector('.search-input');
+    if (!elSearchInput.value) {
+        setFilterBy('')
+        updateKeyWords(key)
+        renderKeyWords()
+        renderImgs()
+    }
+}
+
+
+function onSearchKey(key) {
+    setFilterBy(key)
+    updateKeyWords(key)
+    renderKeyWords()
+    renderImgs()
+}
+
+
+function getFontSize(num) {
+
+    num = (num <= 15) ? num : 15
+    return (13 + num)/16
+}

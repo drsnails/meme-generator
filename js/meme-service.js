@@ -1,27 +1,43 @@
 'use strict'
 
 
-var gKeywords = { 'happy': 1, 'funny': 1 }
+var gFilterKeyWord = ''
+var gKeywords = { 'funny': 13, 'dark': 2, 'happy': 7, 'aww': 6, 'yes':3 }
 var gImgs = [
-    { id: 1, url: 'img/img-squares/1.jpg', keywords: ['happy'] },
-    { id: 2, url: 'img/img-squares/2.jpg', keywords: ['happy'] },
-    { id: 3, url: 'img/img-squares/3.jpg', keywords: ['happy'] },
-    { id: 4, url: 'img/img-squares/4.jpg', keywords: ['happy'] },
-    { id: 5, url: 'img/img-squares/5.jpg', keywords: ['happy'] },
-    { id: 6, url: 'img/img-squares/6.jpg', keywords: ['happy'] },
-    { id: 7, url: 'img/img-squares/7.jpg', keywords: ['happy'] },
-    { id: 8, url: 'img/img-squares/8.jpg', keywords: ['happy'] },
-    { id: 9, url: 'img/img-squares/9.jpg', keywords: ['happy'] },
-    { id: 10, url: 'img/img-squares/10.jpg', keywords: ['happy'] },
-    { id: 11, url: 'img/img-squares/11.jpg', keywords: ['happy'] },
-    { id: 12, url: 'img/img-squares/12.jpg', keywords: ['happy'] },
-    { id: 13, url: 'img/img-squares/13.jpg', keywords: ['happy'] },
-    { id: 14, url: 'img/img-squares/14.jpg', keywords: ['happy'] },
-    { id: 15, url: 'img/img-squares/15.jpg', keywords: ['happy'] },
-    { id: 16, url: 'img/img-squares/16.jpg', keywords: ['happy'] },
-    { id: 17, url: 'img/img-squares/17.jpg', keywords: ['happy'] },
-    { id: 18, url: 'img/img-squares/18.jpg', keywords: ['happy'] },
+    { id: 1, url: 'img/img-squares/1.jpg', keywords: ['dark'] },
+    { id: 2, url: 'img/img-squares/2.jpg', keywords: ['aww', 'happy'] },
+    { id: 3, url: 'img/img-squares/3.jpg', keywords: ['funny', 'aww'] },
+    { id: 4, url: 'img/img-squares/4.jpg', keywords: ['funny', 'aww'] },
+    { id: 5, url: 'img/img-squares/5.jpg', keywords: ['funny', 'yes'] },
+    { id: 6, url: 'img/img-squares/6.jpg', keywords: ['funny'] },
+    { id: 7, url: 'img/img-squares/7.jpg', keywords: ['funny', 'aww'] },
+    { id: 8, url: 'img/img-squares/8.jpg', keywords: ['funny'] },
+    { id: 9, url: 'img/img-squares/9.jpg', keywords: ['funny', 'dark'] },
+    { id: 10, url: 'img/img-squares/10.jpg', keywords: ['funny'] },
+    { id: 11, url: 'img/img-squares/11.jpg', keywords: ['funny', 'wow'] },
+    { id: 12, url: 'img/img-squares/12.jpg', keywords: ['funny'] },
+    { id: 13, url: 'img/img-squares/13.jpg', keywords: ['funny'] },
+    { id: 14, url: 'img/img-squares/14.jpg', keywords: ['funny'] },
+    { id: 15, url: 'img/img-squares/15.jpg', keywords: ['funny'] },
+    { id: 16, url: 'img/img-squares/16.jpg', keywords: ['funny'] },
+    { id: 17, url: 'img/img-squares/17.jpg', keywords: ['funny', 'wow'] },
+    { id: 18, url: 'img/img-squares/18.jpg', keywords: ['funny'] },
 ];
+
+
+
+
+function getImgs() {
+    if (!gFilterKeyWord) return gImgs
+    return gImgs.filter(img => {
+        return img.keywords.includes(gFilterKeyWord)
+    })
+}
+
+
+function getKeyWords() {
+    return gKeywords
+}
 
 var gMeme = createMeme()
 function createMeme(imgId = 1) {
@@ -36,7 +52,7 @@ function createMeme(imgId = 1) {
 
 function createLine() {
     let line = {
-        txt: '"Somthing funny"',
+        txt: '"Type Something"',
         size: 35,
         align: 'center',
         color: 'white',
@@ -45,6 +61,10 @@ function createLine() {
 
     return line
 
+}
+
+function setFilterBy(keyWord) {
+    gFilterKeyWord = keyWord
 }
 
 
@@ -216,4 +236,8 @@ function setTextPosition(offsetY) {
     selectedLine.pos.y = offsetY
 }
 
+
+function updateKeyWords(key) {
+    gKeywords[key] = (gKeywords[key]) ? gKeywords[key] + 1 : 1
+}
 
