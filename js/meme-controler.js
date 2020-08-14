@@ -2,7 +2,8 @@
 
 var gCanvas;
 var gCtx;
-const elImg = new Image();
+var gIsMouseDown = false
+
 // var gCanvasDownload;
 // var gCtxDownload;
 var gIsDownload = false
@@ -17,15 +18,10 @@ function initCanvas() {
 
 }
 
-
-
-
-
-
 function rendergMeme() {
 
     let img = getImg()
-
+    var elImg = new Image();
     resizeCanvasByCont()
     drawImg(elImg, img)
     elImg.src = img.url
@@ -52,6 +48,8 @@ function drawLines(img) {
         let fontDetails = getFontDetails(line.size)
         line.pos
         drawText(line.txt, line.align, line.color, line.strokeColor, fontDetails, line.pos.x, line.pos.y)
+        
+        
         if (idx === gMeme.selectedLineIdx) {
             markLine(line)
         }
@@ -82,14 +80,37 @@ function drawText(text, alignDir, fillColor, strokeColor, fontDetails, x, y) {
 
 function markLine(line) {
     if (gIsDownload) return
+    var t = gCtx.measureText(line.text)
+        
     gCtx.globalCompositeOperation = "multiply";
     gCtx.rect(0, line.pos.y + line.size / 8, gCanvas.width, -line.size);
+    
     gCtx.strokeStyle = '#aaa';
     gCtx.stroke();
     gCtx.fillStyle = "#ddd";
     gCtx.fillRect(0, line.pos.y + line.size / 8, gCanvas.width, -line.size);
     gCtx.globalCompositeOperation = "source-over";
+    
+}
 
+
+function handleMouseDrag(ev) {
+    if (ev.type === 'mousedown') {
+        onMouseDown()
+    }
+
+    if (ev.type === 'mouseup') {
+        initPositions()
+        gIsMouseDown = false
+    }
+}
+
+
+function onMouseDown() {
+    if (gIsMouseDown) return
+    gIsMouseDown = true
+    const elMyCanvas = document.querySelector('.canvas-container');
+    elMyCanvas.onmousemove = onDraw;
 }
 
 
@@ -229,23 +250,39 @@ function onChangeFillColor(elFillColor) {
     rendergMeme()
 }
 
-function onDownloadImg(elLink) {
+function onDownloadImg_(elLink) {
     // rendergMeme()
     // ev.preventDefault()
-    elLink.prev
     var imgContent = gCanvas.toDataURL('image/jpg');
     elLink.href = imgContent
-    
+
 
 }
 
+function onDownloadImg() {
+    gIsDownload = true
+    rendergMeme()
+    setTimeout(() => {
+        var url = gCanvas.toDataURL('image2/jpg', 1.0);        
+        var link = document.getElementById("dn-link")
+        link.href = url
+        link.click()
+        gIsDownload = false
+        rendergMeme()
+    }, 100);
+}
 
 
+function onClickLine(ev) {
+    // console.log('offsetX', ev.offsetX);
+    // console.log('offsetY', ev.offsetY);
 
-// function restart_(ev) {
+    let offsetX, offsetY;
+    ({offsetX, offsetY} = ev)
+    selectClickedLine({offsetX, offsetY})
+    rendergMeme()
 
-
-//     rendergMeme()
-
-
-// }
+    // let line = getSelectedLine()
+    // console.log(`\n\nline size: ${line.size}\ny pos: ${line.pos.y}`);
+    
+}

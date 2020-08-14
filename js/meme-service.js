@@ -15,12 +15,11 @@ var gImgs = [
     { id: 10, url: 'img/img-squares/10.jpg', keywords: ['happy'] },
     { id: 11, url: 'img/img-squares/11.jpg', keywords: ['happy'] },
     { id: 12, url: 'img/img-squares/12.jpg', keywords: ['happy'] },
-    { id: 13, url: 'img/img-squares/13.jpg', keywords: ['happy'] },
 ];
 var gMeme = createMeme()
 
 
-function createMeme(imgId=1) {
+function createMeme(imgId = 1) {
     let meme = {
         selectedImgId: imgId,
         selectedLineIdx: 0,
@@ -108,18 +107,19 @@ function addLine() {
     } else if (lineLen === 1) {
         linePosY = gCanvas.height - line.size
     } else {
-        linePosY = lineLen*line.size
+        linePosY = lineLen * line.size
     }
 
     line['pos'] = { x: gCanvas.width / 2, y: linePosY }
     lines.push(line)
-    toggleLine()
+    // toggleLine()
+    changeToNewLine()
 }
 
 function deleteLine() {
     let selectedLineIdx = gMeme.selectedLineIdx
     gMeme.lines.splice(selectedLineIdx, 1)
-    gMeme.selectedLineIdx =gMeme.lines.length-1
+    gMeme.selectedLineIdx = gMeme.lines.length - 1
 }
 
 
@@ -133,6 +133,13 @@ function toggleLine() {
     gMeme.selectedLineIdx = (selectedLineIdx + 1 === linesLen) ? 0 : selectedLineIdx + 1
 }
 
+function changeToNewLine() {
+    let Lineslen = gMeme.lines.length
+    gMeme.selectedLineIdx = Lineslen - 1
+}
+
+
+
 function getSelectedLineTxt() {
     let selectedLineIdx = gMeme.selectedLineIdx
     let lineTxt = gMeme.lines[selectedLineIdx].txt
@@ -145,19 +152,19 @@ function changeLineTxtAlign(alignDir) {
 }
 
 function setLinePosAndAlign(selectedLine) {
-    
+
     switch (selectedLine.align) {
         case 'left':
             selectedLine.pos.x = 5
             selectedLine.align = 'start'
-            return 
+            return
         case 'right':
-            selectedLine.pos.x = gCanvas.width-5
+            selectedLine.pos.x = gCanvas.width - 5
             selectedLine.align = 'end'
-            return 
-        
+            return
+
         case 'center':
-            selectedLine.pos.x = gCanvas.width/2
+            selectedLine.pos.x = gCanvas.width / 2
             selectedLine.align = 'center'
             return
     }
@@ -172,7 +179,7 @@ function getSelectedLine() {
     return selectedLine
 }
 
-function resetLineTxt(){
+function resetLineTxt() {
     let selectedLine = gMeme.lines[0]
     selectedLine.txt = ''
     selectedLine.pos.y = selectedLine.size
@@ -189,4 +196,16 @@ function changeFillColor(color) {
     selectedLine.color = color
 
 }
+
+function selectClickedLine({ offsetX, offsetY }) {
+    gMeme.lines.forEach((line, idx) => {
+        if (offsetY < line.pos.y & offsetY > line.pos.y - line.size) {
+            gMeme.selectedLineIdx = idx
+        }
+    })
+}
+
+
+
+
 

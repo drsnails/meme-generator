@@ -41,8 +41,8 @@
                 <div class="meme-img" ><img onclick="onStartMeme(8)" class="img" src="img/img-squares/8.jpg" alt=""></div>
                 <div class="meme-img" ><img onclick="onStartMeme(9)" class="img" src="img/img-squares/9.jpg" alt=""></div>
                 <div class="meme-img" ><img onclick="onStartMeme(10)" class="img" src="img/img-squares/10.jpg" alt=""></div>
-                <div class="meme-img" ><img onclick="onStartMeme(12)" class="img" src="img/img-squares/11.jpg" alt=""></div>
-                <div class="meme-img" ><img onclick="onStartMeme(13)" class="img" src="img/img-squares/12.jpg" alt=""></div>
+                <div class="meme-img" ><img onclick="onStartMeme(11)" class="img" src="img/img-squares/11.jpg" alt=""></div>
+                <div class="meme-img" ><img onclick="onStartMeme(12)" class="img" src="img/img-squares/12.jpg" alt=""></div>
                 
             </div>
         </main>
@@ -52,7 +52,7 @@
     <div class="edit-page hidden">
         <div class="wrap-container">
             <div class="canvas-container">
-                <canvas class="myCanvas" id="myCanvas" height="420" width="400">
+                <canvas onclick="onClickLine(event)" class="myCanvas" id="myCanvas" height="420" width="400">
                 </canvas>
                 
                 
@@ -87,10 +87,14 @@
                 <div class="icons" hidden>ICONS ICONS ICONS ICONS</div>
 
                 <div class="share-btns">
+                
                     <button class="share-btn"><i class="fas fa-share-alt"></i> Share</button>
-                    <button class="download-btn">
-                        <a href="#" onclick="onDownloadImg(this)" download = "my-meme.jpg" ><i  class="fas fa-download download-link"></i> Download</a>
+                    
+                    <button class="download-btn" onclick="onDownloadImg()">
+                        <i class="fas fa-download download-link"></i>  Download
                     </button>
+                    <a href="#" id="dn-link" download="my-meme.jpg" hidden>Download
+                    </a>
                 </div>
             </div>
 
