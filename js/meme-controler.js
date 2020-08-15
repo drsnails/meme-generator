@@ -6,7 +6,7 @@ var gIsMouseDown = false
 var gIsDownload = false
 var gKeyWordsLimit = 5
 
-localStorage.clear()
+
 
 function init() {
     let elClearContainer = document.querySelector('.clear-container');
