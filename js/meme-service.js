@@ -80,8 +80,8 @@ function getSavedMemes() {
 }
 
 function addSavedMeme() {
-    console.log(gMeme);
     let currMeme = JSON.parse(JSON.stringify(gMeme))
+    currMeme.id = makeId()
     gSavedMemes.push(currMeme)
 }
 
