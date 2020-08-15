@@ -2,7 +2,8 @@
 
 const SAVED_KEY = "saved"
 var gFilterKeyWord = ''
-var gKeywords = { 'funny': 13, 'dark': 2, 'happy': 7, 'aww': 6, 'yes':3 }
+var gKeywords = { 'happy': 7, 'dark': 2, 'funny': 12, 'aww': 6, 'yes': 1, 'politics': 4, 'women': 13, 'animals': 2, 'clouds': 7, 'pizza': 6, 'sport': 3, 'scotland': 4 }
+
 var gImgs = [
     { id: 1, url: 'img/img-squares/1.jpg', keywords: ['dark'] },
     { id: 2, url: 'img/img-squares/2.jpg', keywords: ['aww', 'happy'] },
@@ -280,4 +281,19 @@ function updateKeyWords(key) {
 function clearSavedMemes() {
     gSavedMemes = []
     localStorage.clear()
+}
+
+function normalizeSearchCount(currCount) {
+    let maxSearchCount = getMaxSearchCount()
+    return (currCount / maxSearchCount)*1 + 0.5
+
+}
+
+
+function getMaxSearchCount() {
+    let max = 1
+    for (let key in gKeywords) {
+        max = (max >= gKeywords[key]) ? max : gKeywords[key]
+    }
+    return max
 }

@@ -4,6 +4,7 @@ var gCanvas;
 var gCtx;
 var gIsMouseDown = false
 var gIsDownload = false
+var gKeyWordsLimit = 5
 
 // localStorage.clear()
 
@@ -74,11 +75,12 @@ function renderKeyWords() {
     for (let key in keyWords) {
         count++
         strHTMLs += `<span onclick="onSearchKey('${key}')" style="font-size: ${getFontSize(keyWords[key])}em">${key}</span>`
-        if (count >= 5) break
+        if (count >= gKeyWordsLimit) break
     }
     let elKeyWords = document.querySelector('.key-words');
     elKeyWords.innerHTML = strHTMLs
 }
+
 
 function rendergMeme() {
     let img = getImg()
@@ -425,9 +427,10 @@ function onSearchKey(key) {
 
 
 function getFontSize(num) {
-
-    num = (num <= 15) ? num : 15
-    return (13 + num) / 16
+    // num = (num <= 30) ? num : 30
+    // return (13 + num) / 16
+    let t = normalizeSearchCount(num)
+    return t
 }
 
 function onSaveMeme() {
@@ -443,8 +446,7 @@ function showHidePopUp() {
         elPopUp.classList.add("show");
         setTimeout(() => {
             elPopUp.classList.remove("show");
-        }, 1300);
-
+        }, 2000);
     }
 }
 
@@ -452,4 +454,78 @@ function onClearSavedMemes() {
     clearSavedMemes()
     onHideClearBtn()
     onRenderSavedMemes()
+}
+
+
+function onToggleKeyWordsNum(elBtn) {
+    
+    if (gKeyWordsLimit <= 5) {
+        gKeyWordsLimit = Infinity
+        elBtn.innerText = 'Less'
+    } else {
+        gKeyWordsLimit = 5
+        elBtn.innerText = 'More'
+    }
+    renderKeyWords()
+}
+
+
+
+function doUploadImg(elForm, onSuccess) {
+    var formData = new FormData(elForm);
+    fetch('http://ca-upload.com/here/upload.php', {
+        method: 'POST',
+        body: formData
+    })
+        .then(function (res) {
+            return res.text()
+        })
+        .then(onSuccess)
+        .catch(function (err) {
+            console.error(err)
+        })
+}
+
+
+function uploadImg(elForm, ev) {
+    ev.preventDefault();
+    gIsDownload = true
+    rendergMeme()
+    let elShareContainer = document.querySelector('.share-container')
+    setTimeout(() => {
+        document.getElementById('imgData').value = gCanvas.toDataURL("image/jpeg");
+        function onSuccess(uploadedImgUrl) {
+            uploadedImgUrl = encodeURIComponent(uploadedImgUrl)
+            elShareContainer.innerHTML = `
+            <a onclick="removeLink(this)" class="btn" href="https://www.facebook.com/sharer/sharer.php?u=${uploadedImgUrl}&t=${uploadedImgUrl}" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=${uploadedImgUrl}&t=${uploadedImgUrl}'); return false;">
+            <i class="fab fa-facebook"></i>
+            </a>`
+        }
+    
+        doUploadImg(elForm, onSuccess);
+        gIsDownload = false
+        rendergMeme()
+    }, 50);
+}
+
+
+
+function removeLink(elLink) {
+    elLink.style.display = 'none'
+}
+
+
+function onImgInput(ev) {
+    loadImageFromInput(ev, renderCanvas)
+}
+function loadImageFromInput(ev, onImageReady) {
+    document.querySelector('.share-container').innerHTML = ''
+    var reader = new FileReader();
+
+    reader.onload = function (event) {
+        var img = new Image();
+        img.onload = onImageReady.bind(null, img)
+        img.src = event.target.result;
+    }
+    reader.readAsDataURL(ev.target.files[0]);
 }

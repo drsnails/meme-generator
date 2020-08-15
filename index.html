@@ -15,7 +15,7 @@
             <span>Logo</span>
             <section class="nav-btns">
                 <button onclick="onCloseEdit(this), onHideClearBtn(), renderImgs(), onToggleBtnActive('gallery-btn')"
-                    class="gallery-btn">Gallery</button>
+                    class="gallery-btn active">Gallery</button>
                 <button onclick="onCloseEdit(this), onShowClearBtn(), onRenderSavedMemes(), onToggleBtnActive('saved-btn')"
                     class="saved-btn">Saved</button>
             </section>
@@ -32,11 +32,10 @@
                     </button>
                 </section>
                 <div class="key-words">
-                    <!-- <span>Funny</span>
-                    <span>Wow</span>
-                    <span>Dark</span> -->
+                    
                 </div>
-                <button class="more-btn">More</button>
+                
+                <button onclick="onToggleKeyWordsNum(this)" class="more-btn">More</button>
             </section>
             <div class="clear-container">
                 <button class="clear-btn hidden" onclick="onClearSavedMemes()">Clear All</button>
@@ -94,7 +93,12 @@
                 <div class="icons" hidden>ICONS ICONS ICONS ICONS</div>
 
                 <div class="share-btns">
-                    <button class="share-btn"><i class="fas fa-share-alt"></i> Share</button>
+                    <form class="form " action="" method="POST" enctype="multipart/form-data" onsubmit="uploadImg(this, event)">
+                        <input name="img" id="imgData" type="hidden" />
+                        <button type="submit" class="share-btn"><i class="fas fa-share-alt"></i> Share</button>
+                        <div class="share-container"></div>
+                    </form>
+                    <!-- <button class="share-btn"><i class="fas fa-share-alt"></i> Share</button> -->
                     <button class="download-btn" onclick="onDownloadImg()">
                         <i class="fas fa-download download-link"></i> Download
                     </button>
