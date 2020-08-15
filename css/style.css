@@ -717,9 +717,6 @@ a {
     .search-input-sec {
         display: flex;
         width: 75%;
-        /* width: 100%; */
-        /* margin: 0 auto; */
-        /* justify-content: space-between; */
     }
     .search-input {
         margin-right: 30px;
@@ -735,6 +732,10 @@ a {
     }
     .clear-btn {
         margin-left: 2rem;
+    }
+
+    .search-all {
+        width: 48px;
     }
 }
 
