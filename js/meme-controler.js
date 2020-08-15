@@ -6,7 +6,7 @@ var gIsMouseDown = false
 var gIsDownload = false
 var gKeyWordsLimit = 5
 
-// localStorage.clear()
+localStorage.clear()
 
 function init() {
     let elClearContainer = document.querySelector('.clear-container');
@@ -405,6 +405,7 @@ function onSearch() {
     updateKeyWords(keyWord)
     renderKeyWords()
     renderImgs()
+    saveToStorage(KEYWORDS, gKeywords)
 }
 
 function onChangeSearchVal() {
@@ -425,6 +426,11 @@ function onSearchKey(key) {
     renderKeyWords()
     renderImgs()
     saveToStorage(KEYWORDS, gKeywords)
+}
+
+function onShowAll() {
+    setFilterBy('')
+    renderImgs()
 }
 
 
@@ -500,7 +506,7 @@ function uploadImg(elForm, ev) {
         function onSuccess(uploadedImgUrl) {
             uploadedImgUrl = encodeURIComponent(uploadedImgUrl)
             elShareContainer.innerHTML = `
-            <a onclick="removeLink(this)" class="btn" href="https://www.facebook.com/sharer/sharer.php?u=${uploadedImgUrl}&t=${uploadedImgUrl}" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=${uploadedImgUrl}&t=${uploadedImgUrl}'); return false;">
+            <a onclick="removeLink(this)" class="btn" href="//www.facebook.com/sharer/sharer.php?u=${uploadedImgUrl}&t=${uploadedImgUrl}" title="Share on Facebook" target="_blank" onclick="window.open('//www.facebook.com/sharer/sharer.php?u=${uploadedImgUrl}&t=${uploadedImgUrl}'); return false;">
             <i class="fab fa-facebook"></i>
             </a>`
         }

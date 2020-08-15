@@ -34,7 +34,7 @@ function createKeyWords() {
     let keyWords = loadFromStorage(KEYWORDS)
     
     if (!keyWords) {
-        gKeywords = { 'happy': 5, 'dark': 2, 'funny': 20, 'aww': 6, 'yes': 1, 'politics': 4, 'women': 13, 'animals': 2, 'clouds': 7, 'pizza': 6, 'sport': 3, 'scotland': 4 }
+        gKeywords = { 'happy': 7, 'dark': 2, 'funny': 23, 'aww': 6, 'yes': 1, 'politics': 4, 'women': 15, 'animals': 2, 'clouds': 18, 'pizza': 6, 'sport': 3, 'scotland': 15 }
         saveToStorage(KEYWORDS, gKeywords)
     } else {
         gKeywords = keyWords
