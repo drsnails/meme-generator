@@ -5,11 +5,13 @@ var gCtx;
 var gIsMouseDown = false
 var gIsDownload = false
 
+// localStorage.clear()
 
-function initCanvas() {
+function init() {
     gCanvas = document.getElementById('myCanvas');
     gCtx = gCanvas.getContext('2d');
     // rendergMeme()
+    getSavedMemesFromeStorage()
     renderImgs()
     renderKeyWords()
 }
@@ -20,15 +22,34 @@ function renderImgs() {
     let strHTMLs = imgs.map(img => {
         return `
         <div class="meme-img" >
-            <img onclick="onStartMeme(${img.id})" class="img img${img.id}" 
+            <img onclick="onStartMeme(${img.id}), onToggleBtnActive(null)" class="img img${img.id}" 
             src="img/img-squares/${img.id}.jpg" alt="">
         </div>
         `
-
     })
     let elGalleryContainer = document.querySelector('.gallery-container');
     elGalleryContainer.innerHTML = strHTMLs.join('')
 }
+
+
+
+function onRenderSavedMemes() {
+    let elGalleryContainer = document.querySelector('.gallery-container');
+    if (!gSavedMemes.length) {
+        elGalleryContainer.innerHTML = '<h1>There are no saved Memes</h1>'
+    } else {
+        let savedMemesImgs = getSavedMemesImgs()
+        let strHTMLs = savedMemesImgs.map(img => {
+            return `
+            <div class="meme-img" >
+                <img onclick="onStartSavedMeme(${img.id}), onToggleBtnActive(null)" class="img img${img.id}" 
+                src="img/img-squares/${img.id}.jpg" alt="">
+            </div>
+            `
+        })
+        elGalleryContainer.innerHTML = strHTMLs.join('')
+    }
+} 
 
 function renderKeyWords() {
     let keyWords = getKeyWords()
@@ -212,6 +233,8 @@ function onCloseEdit() {
     const elEditPage = document.querySelector('.edit-page');
     elHomePage.classList.remove('hidden')
     elEditPage.classList.add('hidden')
+    renderImgs()
+
 }
 
 function onStartMeme(imgId) {
@@ -222,10 +245,32 @@ function onStartMeme(imgId) {
     initLinePos()
 }
 
+
+function onStartSavedMeme(imgId) {
+    setSavedMemeToGlobal(imgId)
+    onOpenEdit()
+    rendergMeme()
+    goTopPage()
+    initLinePos()
+}
+
+
+function onToggleBtnActive(btnClass) {
+    let elNavBtns = document.querySelectorAll('.nav-btns button');
+    elNavBtns.forEach(elBtn => {
+        if (elBtn.classList.contains(btnClass)) {
+            elBtn.classList.add('active')
+        } else {
+            elBtn.classList.remove('active')
+        } 
+
+    })
+
+}
+
 function onChangeLineTxt(elLine) {
     changeLineTxt(elLine.value)
     rendergMeme()
-
 }
 
 function onIncFontSize() {
@@ -365,5 +410,10 @@ function onSearchKey(key) {
 function getFontSize(num) {
 
     num = (num <= 15) ? num : 15
-    return (13 + num)/16
+    return (13 + num) / 16
+}
+
+function onSaveMeme() {
+    addSavedMeme()
+    saveToStorage(SAVED_KEY, gSavedMemes)
 }

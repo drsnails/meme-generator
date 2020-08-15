@@ -10,6 +10,7 @@
     src: url("../fonts/Poppins/Poppins-Bold.ttf") format("truetype");
 }
 
+
 /* HELPERS */
 
 .hidden {
@@ -33,9 +34,8 @@ input {
 }
 
 .nav-btns button:hover {
-    color: rgb(117, 246, 255);
+    color: #31cfc7;
 }
-
 
 /* layouts */
 
@@ -49,7 +49,7 @@ html {
 }
 
 body {
-    padding: 0px 10px 10px;
+    padding: 0px 10px 0;
     margin: 0;
     background-color: black;
     color: white;
@@ -65,7 +65,7 @@ header {
     background-color: #5970c1;
     border-radius: 37px;
     /* padding: 10px; */
-    margin: 10px auto 10px auto;
+    margin: 10px auto 10px;
 }
 
 header button {
@@ -80,6 +80,15 @@ header button {
     justify-content: space-around;
 }
 
+.active {
+    /* width: 116px;
+    height: 40px; */
+    box-shadow: 0 3px 6px 1px rgba(0, 0, 0, 0.15);
+    border-radius: 20px;
+    color: #21ac91;
+    background-color: #fefefe;
+}
+
 .more-btn {
     box-shadow: 0 3px 6px 1px rgba(0, 0, 0, 0.15);
     width: 80px;
@@ -89,7 +98,7 @@ header button {
 }
 
 .more-btn:hover {
-    color: rgb(117, 246, 255);
+    color: #7dffe5;
 }
 
 .container {
@@ -149,7 +158,6 @@ header button {
     box-shadow: 0 3px 6px 1px rgba(0, 0, 0, 0.15);
     border-radius: 25px;
     min-width: 200px;
-    /* max-width: 400px; */
     background-color: #fefefe7c;
     padding: 0 10px 0;
     text-overflow: ellipsis;
@@ -219,8 +227,6 @@ header button {
 
 .canvas-container {
     display: flex;
-    /* border: 1px solid white; */
-    /* background-color: tomato; */
     font-family: Impact;
     width: 400px;
     height: 420px;
@@ -332,17 +338,30 @@ header button {
 }
 
 .share-btn {
-    width: 110px;
+    flex-basis: 30%;
+    margin-right: 0.5rem;
+    margin-left: 1rem;
     height: 41px;
-    box-shadow: 1px 3px 0 #165c9c, inset 0 3px 0 #689be7;
+    box-shadow: 1px 4px 0 #165c9c, inset 0 3px 0 #689be7;
     border-radius: 15px;
     background-color: #1e7cd3;
 }
 
-.download-btn {
-    width: 110px;
+.save-btn {
+    flex-basis: 30%;
+    margin: 0 0.5rem;
     height: 41px;
-    box-shadow: 1px 6px 0 #632687, inset 0 5px 0 #a464ec;
+    box-shadow: 1px 4px 0 #1c632b, inset 0 3px 0 #5ad876;
+    border-radius: 15px;
+    background-color: #29b346;
+}
+
+.download-btn {
+    flex-basis: 30%;
+    margin-left: 0.5rem;
+    margin-right: 1rem;
+    height: 41px;
+    box-shadow: 1px 4px 0 #632687, inset 0 3px 0 #a464ec;
     border-radius: 15px;
     background-color: #8f44bb;
 }
@@ -416,14 +435,6 @@ a {
     .text-edit {
         display: flex;
         width: 90%;
-        /* flex-wrap: wrap;
-        margin: 0 auto;
-        justify-content: space-evenly;
-        align-items: center;
-        align-content: center;
-        background-color: #19a59f;
-        padding: 2px;
-        border-radius: 10px; */
     }
 }
 
@@ -499,26 +510,35 @@ a {
         display: flex;
         margin: 0 auto;
         /* justify-content: space-evenly; */
-        justify-content: center;
+        /* justify-content: center; */
         width: 90%;
     }
     .share-btn {
-        width: 90px;
+        flex-basis: 30%;
         height: 30px;
-        box-shadow: 1px 3px 0 #165c9c, inset 0 3px 0 #689be7;
         border-radius: 8px;
-        background-color: #1e7cd3;
-        margin-right: 25%;
+        margin: 10px 0.5rem 10px 1rem;
+        margin-left: 1rem;
+        margin-left: 1rem;
         margin-top: 10px;
         margin-bottom: 10px;
     }
-    .download-btn {
-        width: 90px;
+
+    .save-btn {
+        flex-basis: 30%;
+        margin: 10px 0.5rem;
         height: 30px;
+        border-radius: 8px;
+    }
+
+    .download-btn {
+        flex-basis: 30%;
+        height: 30px;
+        margin: 10px 1rem 10px 0.5rem;
         box-shadow: 1px 3px 0 #632687, inset 0 3px 0 #a464ec;
         border-radius: 8px;
         background-color: #8f44bb;
-        margin-left: 25%;
+        
         margin-top: 10px;
         margin-bottom: 10px;
     }
@@ -546,7 +566,6 @@ a {
         /* flex-basis: 100%; */
         width: 75%;
         margin: 30px 0px;
-        
     }
     .fa-search {
         right: 0%;
@@ -559,6 +578,8 @@ a {
         grid-template-columns: repeat(2, minmax(150px, 1fr));
         grid-auto-rows: 150px;
         gap: 20px;
+        justify-items: center;
+        
     }
     .edit-container {
         margin-top: 13px;
@@ -584,8 +605,15 @@ a {
         display: flex;
         width: 75%;
     }
-
     
+    .gallery-container h1{
+        font-size: 22px;
+        width: 300px;
+        grid-column: span 2;
+        /* align-self: flex-start; */
+        
+        
+    }
 }
 
 @media only screen and (max-width: 492px) {
@@ -594,6 +622,10 @@ a {
         grid-template-columns: repeat(2, minmax(130px, 1fr));
         grid-auto-rows: 130px;
         gap: 20px;
+    }
+
+    .text-color, .stroke-color {
+        padding: 18.7px;
     }
     .wrap-container {
         display: flex;
@@ -621,15 +653,21 @@ a {
         width: 320px;
     }
     .share-btn {
-        width: 100%;
-        height: 30px;
+        flex-grow: 1;
+        height: 35px;
         margin-right: 15px;
         margin-top: 10px;
         margin-bottom: 10px;
     }
+
+    .save-btn {
+        flex-grow: 1;
+        height: 35px;
+    }
+
     .download-btn {
-        width: 100%;
-        height: 30px;
+        flex-grow: 1;
+        height: 35px;
         margin-left: 15px;
         margin-top: 10px;
         margin-bottom: 10px;
@@ -646,4 +684,4 @@ a {
 
 .key-words span:hover {
     color: #82ffe0b2;
-} 
+}

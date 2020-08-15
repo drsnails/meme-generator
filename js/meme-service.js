@@ -1,6 +1,6 @@
 'use strict'
 
-
+const SAVED_KEY = "saved"
 var gFilterKeyWord = ''
 var gKeywords = { 'funny': 13, 'dark': 2, 'happy': 7, 'aww': 6, 'yes':3 }
 var gImgs = [
@@ -23,6 +23,8 @@ var gImgs = [
     { id: 17, url: 'img/img-squares/17.jpg', keywords: ['funny', 'wow'] },
     { id: 18, url: 'img/img-squares/18.jpg', keywords: ['funny'] },
 ];
+
+var gSavedMemes = [];
 
 
 
@@ -48,6 +50,26 @@ function createMeme(imgId = 1) {
         lines: [createLine()]
     }
     return meme
+}
+
+
+
+function getSavedMemesFromeStorage() {
+    // console.log(localStorage);
+    if (!loadFromStorage(SAVED_KEY)) return
+    gSavedMemes = loadFromStorage(SAVED_KEY)
+}
+
+function getSavedMemesImgs() {
+    return gSavedMemes.map(meme => {
+        return getImgById(meme.selectedImgId)
+    })
+}
+
+function addSavedMeme() {
+    console.log(gMeme);
+    let currMeme = JSON.parse(JSON.stringify(gMeme))
+    gSavedMemes.push(currMeme)
 }
 
 function createLine() {
@@ -88,6 +110,19 @@ function getImgById(imgId) {
 function setNewgMeme(imgId) {
     gMeme = createMeme(imgId)
 }
+
+function setSavedMemeToGlobal(imgId) {
+    let savedMeme = getSavedMeme(imgId)
+    if (!savedMeme) return
+    gMeme = savedMeme
+}
+
+function getSavedMeme(imgId) {
+    return gSavedMemes.find(meme => {
+        return (meme.selectedImgId === imgId)
+    })
+}
+
 function getFont() {
     let font = gMeme.selectedFont
     return font
