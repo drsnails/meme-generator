@@ -1,13 +1,15 @@
 'use strict'
 
-const SAVED_KEY = "saved"
+const SAVEDMEME = "saved"
+const KEYWORDS = "keyWords"
 var gFilterKeyWord = ''
-var gKeywords = { 'happy': 7, 'dark': 2, 'funny': 12, 'aww': 6, 'yes': 1, 'politics': 4, 'women': 13, 'animals': 2, 'clouds': 7, 'pizza': 6, 'sport': 3, 'scotland': 4 }
+var gKeywords;
+
 
 var gImgs = [
     { id: 1, url: 'img/img-squares/1.jpg', keywords: ['dark'] },
     { id: 2, url: 'img/img-squares/2.jpg', keywords: ['aww', 'happy'] },
-    { id: 3, url: 'img/img-squares/3.jpg', keywords: ['funny', 'aww'] },
+    { id: 3, url: 'img/img-squares/3.jpg', keywords: ['funny', 'aww', 'happy'] },
     { id: 4, url: 'img/img-squares/4.jpg', keywords: ['funny', 'aww'] },
     { id: 5, url: 'img/img-squares/5.jpg', keywords: ['funny', 'yes'] },
     { id: 6, url: 'img/img-squares/6.jpg', keywords: ['funny'] },
@@ -27,6 +29,17 @@ var gImgs = [
 
 var gSavedMemes = [];
 
+
+function createKeyWords() {
+    let keyWords = loadFromStorage(KEYWORDS)
+    
+    if (!keyWords) {
+        gKeywords = { 'happy': 5, 'dark': 2, 'funny': 20, 'aww': 6, 'yes': 1, 'politics': 4, 'women': 13, 'animals': 2, 'clouds': 7, 'pizza': 6, 'sport': 3, 'scotland': 4 }
+        saveToStorage(KEYWORDS, gKeywords)
+    } else {
+        gKeywords = keyWords
+    }
+}
 
 
 
@@ -57,8 +70,8 @@ function createMeme(imgId = 1) {
 
 function getSavedMemesFromeStorage() {
     // console.log(localStorage);
-    if (!loadFromStorage(SAVED_KEY)) return
-    gSavedMemes = loadFromStorage(SAVED_KEY)
+    if (!loadFromStorage(SAVEDMEME)) return
+    gSavedMemes = loadFromStorage(SAVEDMEME)
 }
 
 function getSavedMemesImgs() {
@@ -280,7 +293,7 @@ function updateKeyWords(key) {
 
 function clearSavedMemes() {
     gSavedMemes = []
-    localStorage.clear()
+    localStorage.removeItem(SAVEDMEME)
 }
 
 function normalizeSearchCount(currCount) {

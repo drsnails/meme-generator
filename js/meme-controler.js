@@ -15,6 +15,7 @@ function init() {
     gCtx = gCanvas.getContext('2d');
     getSavedMemesFromeStorage()
     renderImgs()
+    createKeyWords()
     renderKeyWords()
 }
 
@@ -413,6 +414,7 @@ function onChangeSearchVal() {
         updateKeyWords(key)
         renderKeyWords()
         renderImgs()
+        saveToStorage(KEYWORDS, gKeywords)
     }
 }
 
@@ -422,6 +424,7 @@ function onSearchKey(key) {
     updateKeyWords(key)
     renderKeyWords()
     renderImgs()
+    saveToStorage(KEYWORDS, gKeywords)
 }
 
 
@@ -435,7 +438,7 @@ function getFontSize(num) {
 
 function onSaveMeme() {
     addSavedMeme()
-    saveToStorage(SAVED_KEY, gSavedMemes)
+    saveToStorage(SAVEDMEME, gSavedMemes)
 }
 
 function showHidePopUp() {
