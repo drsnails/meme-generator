@@ -58,6 +58,7 @@ function getKeyWords() {
 var gMeme = createMeme()
 function createMeme(imgId = 1) {
     let meme = {
+        id: makeId(),
         selectedImgId: imgId,
         selectedLineIdx: 0,
         selectedFont: 'Impact',
@@ -74,10 +75,8 @@ function getSavedMemesFromeStorage() {
     gSavedMemes = loadFromStorage(SAVEDMEME)
 }
 
-function getSavedMemesImgs() {
-    return gSavedMemes.map(meme => {
-        return getImgById(meme.selectedImgId)
-    })
+function getSavedMemes() {
+    return gSavedMemes
 }
 
 function addSavedMeme() {
@@ -125,15 +124,15 @@ function setNewgMeme(imgId) {
     gMeme = createMeme(imgId)
 }
 
-function setSavedMemeToGlobal(imgId) {
-    let savedMeme = getSavedMeme(imgId)
+function setSavedMemeToGlobal(memeId) {
+    let savedMeme = getSavedMeme(memeId)
     if (!savedMeme) return
     gMeme = savedMeme
 }
 
-function getSavedMeme(imgId) {
+function getSavedMeme(memeId) {
     return gSavedMemes.find(meme => {
-        return (meme.selectedImgId === imgId)
+        return (meme.id === memeId)
     })
 }
 

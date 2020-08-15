@@ -7,7 +7,6 @@ var gIsDownload = false
 var gKeyWordsLimit = 5
 
 
-
 function init() {
     let elClearContainer = document.querySelector('.clear-container');
     elClearContainer.style.display = 'none'
@@ -55,13 +54,13 @@ function onRenderSavedMemes() {
     if (!gSavedMemes.length) {
         elGalleryContainer.innerHTML = '<h1>There are no saved Memes</h1>'
     } else {
-        let savedMemesImgs = getSavedMemesImgs()
-        let strHTMLs = savedMemesImgs.map(img => {
+        let savedMemesImgs = getSavedMemes()
+        let strHTMLs = savedMemesImgs.map(meme => {
             return `
             
             <div class="meme-img" >
-                <img onclick="onStartSavedMeme(${img.id}), onToggleBtnActive(null)" class="img img${img.id}" 
-                src="img/img-squares/${img.id}.jpg" alt="">
+                <img onclick="onStartSavedMeme('${meme.id}'), onToggleBtnActive(null)" class="img img${meme.id}" 
+                src="img/img-squares/${meme.selectedImgId}.jpg" alt="">
             </div>
             `
         })
@@ -75,7 +74,7 @@ function renderKeyWords() {
     let count = 0
     for (let key in keyWords) {
         count++
-        strHTMLs += `<span onclick="onSearchKey('${key}')" style="font-size: ${getFontSize(keyWords[key])}em">${key}</span>`
+        strHTMLs += `<span onclick="onSearchKey('${key}'), onChangeBtnToGallery()" style="font-size: ${getFontSize(keyWords[key])}em">${key}</span>`
         if (count >= gKeyWordsLimit) break
     }
     let elKeyWords = document.querySelector('.key-words');
@@ -265,12 +264,12 @@ function onStartMeme(imgId) {
 }
 
 
-function onStartSavedMeme(imgId) {
-    setSavedMemeToGlobal(imgId)
+function onStartSavedMeme(memeId) {
+    setSavedMemeToGlobal(memeId)
     onOpenEdit()
     rendergMeme()
     goTopPage()
-    initLinePos()
+    // initLinePos()
 }
 
 
@@ -278,6 +277,19 @@ function onToggleBtnActive(btnClass) {
     let elNavBtns = document.querySelectorAll('.nav-btns button');
     elNavBtns.forEach(elBtn => {
         if (elBtn.classList.contains(btnClass)) {
+            elBtn.classList.add('active')
+        } else {
+            elBtn.classList.remove('active')
+        }
+
+    })
+
+}
+
+function onChangeBtnToGallery() {
+    let elNavBtns = document.querySelectorAll('.nav-btns button');
+    elNavBtns.forEach(elBtn => {
+        if (elBtn.classList.contains('gallery-btn')) {
             elBtn.classList.add('active')
         } else {
             elBtn.classList.remove('active')
@@ -401,11 +413,13 @@ function filterImgs() {
 
 function onSearch() {
     let keyWord = document.querySelector('.search-input').value;
+    if (!keyWord) return
     setFilterBy(keyWord)
     updateKeyWords(keyWord)
     renderKeyWords()
     renderImgs()
     saveToStorage(KEYWORDS, gKeywords)
+    onChangeBtnToGallery()
 }
 
 function onChangeSearchVal() {
