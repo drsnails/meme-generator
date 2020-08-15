@@ -447,7 +447,7 @@ form {
     justify-content: center;
     flex-basis: 30%;
     margin-right: 1rem;
-    margin-left: 1rem;
+    margin-left: 0.5rem;
     height: 41px;
     box-shadow: 1px 4px 0 #165c9c, inset 0 3px 0 #689be7;
     border-radius: 15px;
