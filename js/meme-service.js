@@ -7,23 +7,23 @@ var gKeywords;
 
 
 var gImgs = [
-    { id: 1, url: 'img/img-squares/1.jpg', keywords: ['dark'] },
+    { id: 1, url: 'img/img-squares/1.jpg', keywords: ['dark', 'politics'] },
     { id: 2, url: 'img/img-squares/2.jpg', keywords: ['aww', 'happy'] },
     { id: 3, url: 'img/img-squares/3.jpg', keywords: ['funny', 'aww', 'happy'] },
     { id: 4, url: 'img/img-squares/4.jpg', keywords: ['funny', 'aww'] },
     { id: 5, url: 'img/img-squares/5.jpg', keywords: ['funny', 'yes'] },
-    { id: 6, url: 'img/img-squares/6.jpg', keywords: ['funny'] },
+    { id: 6, url: 'img/img-squares/6.jpg', keywords: ['wow', 'aliens'] },
     { id: 7, url: 'img/img-squares/7.jpg', keywords: ['funny', 'aww'] },
-    { id: 8, url: 'img/img-squares/8.jpg', keywords: ['funny'] },
+    { id: 8, url: 'img/img-squares/8.jpg', keywords: ['funny', 'happy'] },
     { id: 9, url: 'img/img-squares/9.jpg', keywords: ['funny', 'dark'] },
-    { id: 10, url: 'img/img-squares/10.jpg', keywords: ['funny'] },
-    { id: 11, url: 'img/img-squares/11.jpg', keywords: ['funny', 'wow'] },
-    { id: 12, url: 'img/img-squares/12.jpg', keywords: ['funny'] },
+    { id: 10, url: 'img/img-squares/10.jpg', keywords: ['happy', 'politics'] },
+    { id: 11, url: 'img/img-squares/11.jpg', keywords: ['funny', 'wow', 'sport'] },
+    { id: 12, url: 'img/img-squares/12.jpg', keywords: ['funny', 'scotland'] },
     { id: 13, url: 'img/img-squares/13.jpg', keywords: ['funny'] },
-    { id: 14, url: 'img/img-squares/14.jpg', keywords: ['funny'] },
-    { id: 15, url: 'img/img-squares/15.jpg', keywords: ['funny'] },
+    { id: 14, url: 'img/img-squares/14.jpg', keywords: ['wow', 'aliens', 'pizza'] },
+    { id: 15, url: 'img/img-squares/15.jpg', keywords: [] },
     { id: 16, url: 'img/img-squares/16.jpg', keywords: ['funny'] },
-    { id: 17, url: 'img/img-squares/17.jpg', keywords: ['funny', 'wow'] },
+    { id: 17, url: 'img/img-squares/17.jpg', keywords: ['happy', 'wow', 'politics'] },
     { id: 18, url: 'img/img-squares/18.jpg', keywords: ['funny'] },
 ];
 
@@ -34,7 +34,7 @@ function createKeyWords() {
     let keyWords = loadFromStorage(KEYWORDS)
     
     if (!keyWords) {
-        gKeywords = { 'happy': 7, 'dark': 2, 'funny': 23, 'aww': 6, 'yes': 1, 'politics': 4, 'women': 15, 'animals': 2, 'clouds': 18, 'pizza': 6, 'sport': 3, 'scotland': 15 }
+        gKeywords = { 'happy': 7, 'dark': 2, 'funny': 23, 'aww': 6, 'yes': 1, 'politics': 4, 'aliens': 15, 'animals': 2, 'clouds': 18, 'pizza': 4, 'sport': 8, 'scotland': 15 }
         saveToStorage(KEYWORDS, gKeywords)
     } else {
         gKeywords = keyWords
@@ -70,7 +70,6 @@ function createMeme(imgId = 1) {
 
 
 function getSavedMemesFromeStorage() {
-    // console.log(localStorage);
     if (!loadFromStorage(SAVEDMEME)) return
     gSavedMemes = loadFromStorage(SAVEDMEME)
 }
