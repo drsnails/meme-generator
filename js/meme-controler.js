@@ -482,7 +482,7 @@ function onToggleKeyWordsNum(elBtn) {
 
 function doUploadImg(elForm, onSuccess) {
     var formData = new FormData(elForm);
-    fetch('http://ca-upload.com/here/upload.php', {
+    fetch('//ca-upload.com/here/upload.php', {
         method: 'POST',
         body: formData
     })
@@ -506,7 +506,7 @@ function uploadImg(elForm, ev) {
         function onSuccess(uploadedImgUrl) {
             uploadedImgUrl = encodeURIComponent(uploadedImgUrl)
             elShareContainer.innerHTML = `
-            <a onclick="removeLink(this)" class="btn" href="//www.facebook.com/sharer/sharer.php?u=${uploadedImgUrl}&t=${uploadedImgUrl}" title="Share on Facebook" target="_blank" onclick="window.open('//www.facebook.com/sharer/sharer.php?u=${uploadedImgUrl}&t=${uploadedImgUrl}'); return false;">
+            <a onclick="removeLink(this)" class="btn" href="https://www.facebook.com/sharer/sharer.php?u=${uploadedImgUrl}&t=${uploadedImgUrl}" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=${uploadedImgUrl}&t=${uploadedImgUrl}'); return false;">
             <i class="fab fa-facebook"></i>
             </a>`
         }
