@@ -8,9 +8,10 @@ var gIsDownload = false
 // localStorage.clear()
 
 function init() {
+    let elClearContainer = document.querySelector('.clear-container');
+    elClearContainer.style.display = 'none'
     gCanvas = document.getElementById('myCanvas');
     gCtx = gCanvas.getContext('2d');
-    // rendergMeme()
     getSavedMemesFromeStorage()
     renderImgs()
     renderKeyWords()
@@ -31,7 +32,21 @@ function renderImgs() {
     elGalleryContainer.innerHTML = strHTMLs.join('')
 }
 
+function onShowClearBtn() {
+    if (gSavedMemes.length === 0) return
+    let elClearContainer = document.querySelector('.clear-container');
+    let elClearBtn = document.querySelector('.clear-btn');
+    elClearContainer.style.display = 'flex'
+    elClearBtn.classList.remove('hidden')
 
+}
+
+function onHideClearBtn() {
+    let elClearContainer = document.querySelector('.clear-container');
+    let elClearBtn = document.querySelector('.clear-btn');
+    elClearContainer.style.display = 'none'
+    elClearBtn.classList.add('hidden')
+}
 
 function onRenderSavedMemes() {
     let elGalleryContainer = document.querySelector('.gallery-container');
@@ -41,6 +56,7 @@ function onRenderSavedMemes() {
         let savedMemesImgs = getSavedMemesImgs()
         let strHTMLs = savedMemesImgs.map(img => {
             return `
+            
             <div class="meme-img" >
                 <img onclick="onStartSavedMeme(${img.id}), onToggleBtnActive(null)" class="img img${img.id}" 
                 src="img/img-squares/${img.id}.jpg" alt="">
@@ -49,7 +65,7 @@ function onRenderSavedMemes() {
         })
         elGalleryContainer.innerHTML = strHTMLs.join('')
     }
-} 
+}
 
 function renderKeyWords() {
     let keyWords = getKeyWords()
@@ -262,7 +278,7 @@ function onToggleBtnActive(btnClass) {
             elBtn.classList.add('active')
         } else {
             elBtn.classList.remove('active')
-        } 
+        }
 
     })
 
@@ -407,6 +423,7 @@ function onSearchKey(key) {
 }
 
 
+
 function getFontSize(num) {
 
     num = (num <= 15) ? num : 15
@@ -416,4 +433,23 @@ function getFontSize(num) {
 function onSaveMeme() {
     addSavedMeme()
     saveToStorage(SAVED_KEY, gSavedMemes)
+}
+
+function showHidePopUp() {
+    var elPopUp = document.getElementById("myPopup");
+    if (elPopUp.classList.contains('show')) {
+        elPopUp.classList.remove("show");
+    } else {
+        elPopUp.classList.add("show");
+        setTimeout(() => {
+            elPopUp.classList.remove("show");
+        }, 1300);
+
+    }
+}
+
+function onClearSavedMemes() {
+    clearSavedMemes()
+    onHideClearBtn()
+    onRenderSavedMemes()
 }

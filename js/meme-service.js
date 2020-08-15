@@ -276,3 +276,8 @@ function updateKeyWords(key) {
     gKeywords[key] = (gKeywords[key]) ? gKeywords[key] + 1 : 1
 }
 
+
+function clearSavedMemes() {
+    gSavedMemes = []
+    localStorage.clear()
+}

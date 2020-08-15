@@ -10,6 +10,75 @@
     src: url("../fonts/Poppins/Poppins-Bold.ttf") format("truetype");
 }
 
+/* animations */
+
+.popup {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+.popup .popuptext {
+    visibility: hidden;
+    width: 160px;
+    background-color: #19a59f;
+    border: 2px solid black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -80px;
+}
+
+.popup .popuptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #19a59f transparent transparent transparent;
+}
+
+/* Toggle this class - hide and show the popup */
+
+.popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+
+@-webkit-keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+    
+}
+
 
 /* HELPERS */
 
@@ -106,6 +175,23 @@ header button {
     height: 100%;
     margin: 0 auto;
     /* padding: 10px; */
+}
+
+.clear-container {
+    display: none;
+    justify-content: flex-start;
+    margin-top: 50px;
+    
+}
+
+.clear-btn {
+    box-shadow: 0 3px 6px 1px rgba(0, 0, 0, 0.15);
+    width: 80px;
+    margin-left: 2rem;
+    margin-bottom: -25px;
+    border-radius: 10px;
+    background-color: #0c98b9;
+    /* background-image: linear-gradient(-86deg, #33be6d 0%, #0c98b9 100%); */
 }
 
 .main-container {
@@ -523,14 +609,12 @@ a {
         margin-top: 10px;
         margin-bottom: 10px;
     }
-
     .save-btn {
         flex-basis: 30%;
         margin: 10px 0.5rem;
         height: 30px;
         border-radius: 8px;
     }
-
     .download-btn {
         flex-basis: 30%;
         height: 30px;
@@ -538,7 +622,6 @@ a {
         box-shadow: 1px 3px 0 #632687, inset 0 3px 0 #a464ec;
         border-radius: 8px;
         background-color: #8f44bb;
-        
         margin-top: 10px;
         margin-bottom: 10px;
     }
@@ -565,11 +648,13 @@ a {
     .key-words {
         /* flex-basis: 100%; */
         width: 75%;
-        margin: 30px 0px;
+        margin: 30px 0px 10px;
     }
     .fa-search {
         right: 0%;
     }
+
+    
 }
 
 @media only screen and (max-width: 520px) {
@@ -579,7 +664,6 @@ a {
         grid-auto-rows: 150px;
         gap: 20px;
         justify-items: center;
-        
     }
     .edit-container {
         margin-top: 13px;
@@ -605,14 +689,11 @@ a {
         display: flex;
         width: 75%;
     }
-    
-    .gallery-container h1{
+    .gallery-container h1 {
         font-size: 22px;
         width: 300px;
         grid-column: span 2;
         /* align-self: flex-start; */
-        
-        
     }
 }
 
@@ -623,7 +704,6 @@ a {
         grid-auto-rows: 130px;
         gap: 20px;
     }
-
     .text-color, .stroke-color {
         padding: 18.7px;
     }
@@ -659,12 +739,10 @@ a {
         margin-top: 10px;
         margin-bottom: 10px;
     }
-
     .save-btn {
         flex-grow: 1;
         height: 35px;
     }
-
     .download-btn {
         flex-grow: 1;
         height: 35px;
